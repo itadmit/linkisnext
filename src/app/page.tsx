@@ -223,24 +223,43 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, i) => (
+            {[
+              {
+                name: "יוסי כהן",
+                role: "יוצר תוכן",
+                text: "מאז שעברתי ל-LinkHub, ראיתי עלייה של 40% בקליקים! הממשק פשוט מדהים.",
+                avatar: FiUser,
+              },
+              {
+                name: "מיכל לוי",
+                role: "בלוגרית",
+                text: "הקופונים החכמים עוזרים לי לשתף הנחות עם העוקבים שלי בקלות רבה.",
+                avatar: FiUser,
+              },
+              {
+                name: "דני אברהם",
+                role: "בעל עסק",
+                text: "האנליטיקס המתקדם נותן לי תובנות חשובות על הקהל שלי. ממליץ בחום!",
+                avatar: FiUser,
+              },
+            ].map((testimonial, i) => (
               <div
                 key={testimonial.name}
                 className="bg-white border border-zinc-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
               >
-                <div className="flex items-center gap-3 mb-4">
+                <div className={`flex items-center gap-3 mb-4 ${isRTL ? "" : "flex-row-reverse"}`}>
                   <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
                     {(() => {
                       const AvatarIcon = testimonial.avatar;
                       return <AvatarIcon className="text-white" size={24} />;
                     })()}
                   </div>
-                  <div className="text-right">
+                  <div className={isRTL ? "text-right" : "text-left"}>
                     <p className="text-zinc-900 font-medium">{testimonial.name}</p>
                     <p className="text-zinc-600 text-sm">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-zinc-700">&quot;{testimonial.text}&quot;</p>
+                <p className={`text-zinc-700 ${isRTL ? "text-right" : "text-left"}`}>&quot;{testimonial.text}&quot;</p>
               </div>
             ))}
           </div>
