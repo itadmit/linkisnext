@@ -418,7 +418,7 @@ export default function EditLandingPagePage({
                 </p>
               </div>
             ) : (
-              <div className="space-y-8">
+              <div className="space-y-8 p-4">
                 {sections.map((section, index) => (
                   <div
                     key={section.id}
