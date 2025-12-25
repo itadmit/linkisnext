@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 
   if (!landingPage) {
-    return { title: "לא נמצא | LinkHub" };
+    return { title: "לא נמצא | Linkis" };
   }
 
   const title = landingPage.seoTitle || landingPage.name;

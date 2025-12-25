@@ -23,10 +23,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 
   if (!user) {
-    return { title: "לא נמצא | LinkHub" };
+    return { title: "לא נמצא | Linkis" };
   }
 
-  const title = user.seoTitle || `${user.name || slug} | LinkHub`;
+  const title = user.seoTitle || `${user.name || slug} | Linkis`;
   const description = user.seoDescription || user.bio || `הלינקים של ${user.name || slug}`;
 
   return {

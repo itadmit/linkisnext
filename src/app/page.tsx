@@ -61,7 +61,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <h1 className="text-2xl font-bold text-zinc-900">
-              LinkHub
+              Linkis
           </h1>
             <div className="flex items-center gap-4">
               {session ? (
@@ -227,7 +227,7 @@ export default function HomePage() {
               {
                 name: "יוסי כהן",
                 role: "יוצר תוכן",
-                text: "מאז שעברתי ל-LinkHub, ראיתי עלייה של 40% בקליקים! הממשק פשוט מדהים.",
+                text: "מאז שעברתי ל-Linkis, ראיתי עלייה של 40% בקליקים! הממשק פשוט מדהים.",
                 avatar: FiUser,
               },
               {

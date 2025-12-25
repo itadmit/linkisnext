@@ -17,7 +17,7 @@ export function QRCodeGenerator({ url, slug }: QRCodeGeneratorProps) {
     const canvas = qrRef.current?.querySelector("canvas");
     if (canvas) {
       const link = document.createElement("a");
-      link.download = `linkhub-${slug}-qr.png`;
+      link.download = `linkis-${slug}-qr.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     }

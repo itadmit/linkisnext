@@ -270,7 +270,7 @@ export function PublicPageClient({ user }: PublicPageClientProps) {
               <span className="group-hover:animate-bounce">
                 <IconRenderer iconValue="FiLink" />
               </span>
-              <span>נבנה עם LinkHub</span>
+              <span>נבנה עם Linkis</span>
             </a>
           </div>
         </div>

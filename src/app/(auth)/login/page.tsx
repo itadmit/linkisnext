@@ -49,7 +49,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <Link href="/">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-              LinkHub
+              Linkis
             </h1>
           </Link>
         </div>

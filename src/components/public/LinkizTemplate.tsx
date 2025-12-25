@@ -277,7 +277,7 @@ export function LinkizTemplate({ user }: LinkizTemplateProps) {
             className="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gray-600 transition-colors"
           >
             <IconRenderer iconValue="FiLink" size={14} />
-            <span>נבנה עם LinkHub</span>
+            <span>נבנה עם Linkis</span>
           </a>
         </div>
       </div>

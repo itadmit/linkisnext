@@ -107,7 +107,7 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <Link href="/">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-              LinkHub
+              Linkis
             </h1>
           </Link>
         </div>
@@ -179,7 +179,7 @@ export default function RegisterPage() {
               <div className="flex items-center gap-2 mt-2 justify-end">
                 {getSlugStatusIcon()}
                 <span className="text-sm text-zinc-600">
-                  {formData.slug && `linkhub.com/${formData.slug}`}
+                  {formData.slug && `linkis.com/${formData.slug}`}
                 </span>
               </div>
               {slugStatus === "taken" && (

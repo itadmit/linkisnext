@@ -34,7 +34,7 @@ export function Sidebar() {
       <div className="mb-8 px-2">
         <h1 className="text-xl font-bold text-zinc-900 tracking-tight flex items-center gap-2">
           <span className="w-2 h-6 bg-zinc-900 rounded-full inline-block"></span>
-          LinkHub
+          Linkis
         </h1>
       </div>
 

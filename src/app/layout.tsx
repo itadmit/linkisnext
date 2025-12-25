@@ -11,7 +11,7 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "LinkHub - כל הלינקים שלך במקום אחד",
+  title: "Linkis - כל הלינקים שלך במקום אחד",
   description: "צור דף לינקים מקצועי ושתף אותו עם העולם. סטטיסטיקות, עיצוב מותאם אישית, קופונים ועוד.",
 };
 
