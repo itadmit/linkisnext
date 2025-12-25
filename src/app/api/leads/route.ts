@@ -83,6 +83,68 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Parse sections to find contact form settings
+    let contactFormSettings: any = null;
+    try {
+      const sections = JSON.parse(landingPage.sections || "[]");
+      contactFormSettings = sections.find((s: any) => s.type === "contact-form");
+    } catch (e) {
+      // Ignore parsing errors
+    }
+
+    // Send email notification if enabled
+    if (contactFormSettings?.data?.sendEmailNotification && contactFormSettings?.data?.notificationEmail) {
+      try {
+        // In production, use a proper email service like SendGrid, Resend, etc.
+        // For now, we'll just log it
+        console.log("Email notification would be sent to:", contactFormSettings.data.notificationEmail);
+        console.log("Lead data:", formData);
+        
+        // TODO: Implement actual email sending
+        // await sendEmail({
+        //   to: contactFormSettings.data.notificationEmail,
+        //   subject: `ליד חדש מדף ${landingPage.name}`,
+        //   body: `קיבלת ליד חדש:\n\n${JSON.stringify(formData, null, 2)}`
+        // });
+      } catch (error) {
+        console.error("Failed to send email notification:", error);
+      }
+    }
+
+    // Send webhook if enabled
+    if (contactFormSettings?.data?.enableWebhook && contactFormSettings?.data?.webhookUrl) {
+      try {
+        const webhookResponse = await fetch(contactFormSettings.data.webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            event: "new_lead",
+            landingPage: {
+              id: landingPage.id,
+              name: landingPage.name,
+              slug: landingPage.slug,
+            },
+            lead: {
+              id: lead.id,
+              formData: formData,
+              ipAddress,
+              userAgent,
+              referrer,
+              createdAt: lead.createdAt,
+            },
+          }),
+        });
+
+        if (!webhookResponse.ok) {
+          console.error("Webhook failed:", webhookResponse.statusText);
+        }
+      } catch (error) {
+        console.error("Failed to send webhook:", error);
+      }
+    }
+
     return NextResponse.json(lead);
   } catch (error) {
     console.error("Create lead error:", error);

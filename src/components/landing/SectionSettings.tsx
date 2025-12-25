@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ImageUpload } from "@/components/ui/ImageUpload";
 import { IconPickerModal } from "@/components/dashboard/IconPickerModal";
+import { ColorPicker } from "@/components/ui/ColorPicker";
 import { IconRenderer } from "@/lib/icons";
 
 interface Section {
@@ -93,28 +94,16 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 onChange={(url) => updateData("backgroundImage", url)}
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#6366f1"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע טקסט
-              </label>
-              <input
-                type="color"
-                value={section.style?.textColor || "#ffffff"}
-                onChange={(e) => updateStyle("textColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#6366f1"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
+            <ColorPicker
+              label="צבע טקסט"
+              value={section.style?.textColor || "#ffffff"}
+              onChange={(color) => updateStyle("textColor", color)}
+            />
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 גודל כותרת
@@ -190,17 +179,11 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 <option value={4}>4</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#f9fafb"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#f9fafb"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תכונות
@@ -305,17 +288,11 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 <option value={3}>3</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#f9fafb"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#f9fafb"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 המלצות
@@ -430,28 +407,16 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 <option value="right">ימין</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#ffffff"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע טקסט
-              </label>
-              <input
-                type="color"
-                value={section.style?.textColor || "#000000"}
-                onChange={(e) => updateStyle("textColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#ffffff"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
+            <ColorPicker
+              label="צבע טקסט"
+              value={section.style?.textColor || "#000000"}
+              onChange={(color) => updateStyle("textColor", color)}
+            />
           </>
         )}
 
@@ -503,50 +468,26 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 dir="ltr"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#6366f1"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע טקסט
-              </label>
-              <input
-                type="color"
-                value={section.style?.textColor || "#ffffff"}
-                onChange={(e) => updateStyle("textColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע כפתור
-              </label>
-              <input
-                type="color"
-                value={section.data.buttonColor || "#ffffff"}
-                onChange={(e) => updateData("buttonColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע טקסט כפתור
-              </label>
-              <input
-                type="color"
-                value={section.data.buttonTextColor || "#6366f1"}
-                onChange={(e) => updateData("buttonTextColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#6366f1"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
+            <ColorPicker
+              label="צבע טקסט"
+              value={section.style?.textColor || "#ffffff"}
+              onChange={(color) => updateStyle("textColor", color)}
+            />
+            <ColorPicker
+              label="צבע כפתור"
+              value={section.data.buttonColor || "#ffffff"}
+              onChange={(color) => updateData("buttonColor", color)}
+            />
+            <ColorPicker
+              label="צבע טקסט כפתור"
+              value={section.data.buttonTextColor || "#6366f1"}
+              onChange={(color) => updateData("buttonTextColor", color)}
+            />
           </>
         )}
 
@@ -564,17 +505,11 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#f9fafb"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#f9fafb"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 שאלות ותשובות
@@ -645,17 +580,11 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                 rows={3}
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                צבע רקע
-              </label>
-              <input
-                type="color"
-                value={section.style?.backgroundColor || "#ffffff"}
-                onChange={(e) => updateStyle("backgroundColor", e.target.value)}
-                className="w-full h-10 rounded-lg"
-              />
-            </div>
+            <ColorPicker
+              label="צבע רקע"
+              value={section.style?.backgroundColor || "#ffffff"}
+              onChange={(color) => updateStyle("backgroundColor", color)}
+            />
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 שדות טופס
@@ -683,6 +612,85 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                     </span>
                   </label>
                 ))}
+              </div>
+            </div>
+            
+            {/* Email Settings */}
+            <div className="border-t border-zinc-200 pt-4 mt-4">
+              <h4 className="text-sm font-semibold text-zinc-900 mb-3">הגדרות שליחת מייל</h4>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-700 mb-2">
+                    כתובת אימייל לקבלת לידים
+                  </label>
+                  <input
+                    type="email"
+                    value={section.data.notificationEmail || ""}
+                    onChange={(e) => updateData("notificationEmail", e.target.value)}
+                    placeholder="example@email.com"
+                    className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                    dir="ltr"
+                  />
+                  <p className="text-xs text-zinc-500 mt-1">הלידים יישלחו לכתובת זו</p>
+                </div>
+                <div>
+                  <label className="flex items-center gap-2 text-zinc-700 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={section.data.sendEmailNotification ?? false}
+                      onChange={(e) => updateData("sendEmailNotification", e.target.checked)}
+                      className="rounded"
+                    />
+                    <span>שלח התראה במייל כשמתקבל ליד חדש</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Webhook Settings */}
+            <div className="border-t border-zinc-200 pt-4 mt-4">
+              <h4 className="text-sm font-semibold text-zinc-900 mb-3">הגדרות Webhook</h4>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-700 mb-2">
+                    כתובת Webhook URL
+                  </label>
+                  <input
+                    type="url"
+                    value={section.data.webhookUrl || ""}
+                    onChange={(e) => updateData("webhookUrl", e.target.value)}
+                    placeholder="https://example.com/webhook"
+                    className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                    dir="ltr"
+                  />
+                  <p className="text-xs text-zinc-500 mt-1">הלידים יישלחו ל-URL זה ב-POST request</p>
+                </div>
+                <div>
+                  <label className="flex items-center gap-2 text-zinc-700 text-sm">
+                    <input
+                      type="checkbox"
+                      checked={section.data.enableWebhook ?? false}
+                      onChange={(e) => updateData("enableWebhook", e.target.checked)}
+                      className="rounded"
+                    />
+                    <span>הפעל Webhook</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Success Message */}
+            <div className="border-t border-zinc-200 pt-4 mt-4">
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                  הודעת הצלחה
+                </label>
+                <input
+                  type="text"
+                  value={section.data.successMessage || "תודה! נחזור אליך בהקדם."}
+                  onChange={(e) => updateData("successMessage", e.target.value)}
+                  className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                />
               </div>
             </div>
           </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { SubscriptionBanner } from "@/components/dashboard/SubscriptionBanner";
@@ -15,6 +15,7 @@ export default function DashboardLayout({
 }) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -35,6 +36,13 @@ export default function DashboardLayout({
 
   if (!session) {
     return null;
+  }
+
+  // Check if this is the landing page builder - if so, render without dashboard layout
+  const isBuilderPage = pathname?.includes("/landing-pages/") && pathname?.match(/\/landing-pages\/[^/]+$/);
+
+  if (isBuilderPage) {
+    return <>{children}</>;
   }
 
   return (

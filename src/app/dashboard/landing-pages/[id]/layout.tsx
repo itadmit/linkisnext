@@ -33,6 +33,7 @@ export default function LandingPageBuilderLayout({
     return null;
   }
 
-  return <div className="min-h-screen bg-zinc-100" dir="rtl">{children}</div>;
+  // Full width layout - not inside dashboard
+  return <div className="min-h-screen bg-zinc-100 w-full" dir="rtl">{children}</div>;
 }
 
