@@ -152,11 +152,14 @@ export default function EditLandingPagePage({
   };
 
   const addSection = (type: string) => {
+    const defaultStyle = type === "hero" 
+      ? { backgroundColor: "#6366f1", textColor: "#ffffff" }
+      : {};
     const newSection: Section = {
       type,
       id: `${type}-${Date.now()}`,
       data: getDefaultSectionData(type),
-      style: {},
+      style: defaultStyle,
     };
     setSections([...sections, newSection]);
     setSelectedSectionId(newSection.id);
