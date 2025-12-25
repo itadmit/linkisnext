@@ -111,6 +111,7 @@ export function CountryModal() {
   };
 
   const handleSwitch = () => {
+    if (!country) return;
     const suggestedLang = countryToLanguage[country] || "en";
     setLanguage(suggestedLang);
     setIsOpen(false);
