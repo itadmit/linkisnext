@@ -353,15 +353,53 @@ export default function EditLandingPagePage({
                 {sections.map((section, index) => (
                   <div
                     key={section.id}
-                    className={`rounded-xl transition-all cursor-pointer group ${
+                    className={`rounded-xl transition-all cursor-pointer group relative ${
                       selectedSectionId === section.id
                         ? "ring-2 ring-zinc-900 ring-offset-2"
                         : "hover:ring-2 hover:ring-zinc-300 hover:ring-offset-2"
                     }`}
                     onClick={() => setSelectedSectionId(section.id)}
                   >
+                    {/* Section Actions - Floating on hover */}
+                    <div className="absolute top-2 left-2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (index > 0) moveSection(index, index - 1);
+                        }}
+                        className="p-2 bg-white hover:bg-zinc-100 border border-zinc-200 rounded-lg shadow-lg text-zinc-600 hover:text-zinc-900 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                        disabled={index === 0}
+                        title="הזז למעלה"
+                      >
+                        <FiChevronUp size={16} />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (index < sections.length - 1)
+                            moveSection(index, index + 1);
+                        }}
+                        className="p-2 bg-white hover:bg-zinc-100 border border-zinc-200 rounded-lg shadow-lg text-zinc-600 hover:text-zinc-900 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                        disabled={index === sections.length - 1}
+                        title="הזז למטה"
+                      >
+                        <FiChevronDown size={16} />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteSection(section.id);
+                        }}
+                        className="p-2 bg-white hover:bg-red-50 border border-red-200 rounded-lg shadow-lg text-red-500 hover:text-red-700 transition-all"
+                        title="מחק סקשן"
+                      >
+                        <FiTrash2 size={16} />
+                      </button>
+                    </div>
+
                     {/* Section Preview */}
-                    <div>
+                    <div className={section.data.width === "full" ? "w-full" : ""}>
+                      <div className={section.data.width === "container" ? "max-w-4xl mx-auto" : ""}>
                       {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
@@ -573,43 +611,7 @@ export default function EditLandingPagePage({
                           </div>
                         </div>
                       )}
-                    </div>
-
-                    {/* Section Actions - Only show on hover */}
-                    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-zinc-200 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (index > 0) moveSection(index, index - 1);
-                        }}
-                        className="p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                        disabled={index === 0}
-                        title="הזז למעלה"
-                      >
-                        <FiChevronUp size={16} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (index < sections.length - 1)
-                            moveSection(index, index + 1);
-                        }}
-                        className="p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                        disabled={index === sections.length - 1}
-                        title="הזז למטה"
-                      >
-                        <FiChevronDown size={16} />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          deleteSection(section.id);
-                        }}
-                        className="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors mr-auto"
-                        title="מחק סקשן"
-                      >
-                        <FiTrash2 size={16} />
-                      </button>
+                      </div>
                     </div>
                   </div>
                 ))}

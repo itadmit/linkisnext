@@ -42,6 +42,19 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
           <>
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
+                רוחב סקשן
+              </label>
+              <select
+                value={section.data.width || "container"}
+                onChange={(e) => updateData("width", e.target.value)}
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              >
+                <option value="container">קונטיינר (מוגבל רוחב)</option>
+                <option value="full">רוחב מלא</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
               </label>
               <input
@@ -265,6 +278,19 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
           <>
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
+                רוחב סקשן
+              </label>
+              <select
+                value={section.data.width || "container"}
+                onChange={(e) => updateData("width", e.target.value)}
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              >
+                <option value="container">קונטיינר (מוגבל רוחב)</option>
+                <option value="full">רוחב מלא</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת סקשן
               </label>
               <input
@@ -365,6 +391,19 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
           <>
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
+                רוחב סקשן
+              </label>
+              <select
+                value={section.data.width || "container"}
+                onChange={(e) => updateData("width", e.target.value)}
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              >
+                <option value="container">קונטיינר (מוגבל רוחב)</option>
+                <option value="full">רוחב מלא</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
               </label>
               <input
@@ -423,6 +462,19 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {/* CTA Section */}
         {section.type === "cta" && (
           <>
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
+                רוחב סקשן
+              </label>
+              <select
+                value={section.data.width || "container"}
+                onChange={(e) => updateData("width", e.target.value)}
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              >
+                <option value="container">קונטיינר (מוגבל רוחב)</option>
+                <option value="full">רוחב מלא</option>
+              </select>
+            </div>
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
@@ -496,6 +548,19 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
           <>
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
+                רוחב סקשן
+              </label>
+              <select
+                value={section.data.width || "container"}
+                onChange={(e) => updateData("width", e.target.value)}
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              >
+                <option value="container">קונטיינר (מוגבל רוחב)</option>
+                <option value="full">רוחב מלא</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת סקשן
               </label>
               <input
@@ -558,6 +623,19 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {/* Contact Form Section */}
         {section.type === "contact-form" && (
           <>
+            <div>
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
+                רוחב סקשן
+              </label>
+              <select
+                value={section.data.width || "container"}
+                onChange={(e) => updateData("width", e.target.value)}
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+              >
+                <option value="container">קונטיינר (מוגבל רוחב)</option>
+                <option value="full">רוחב מלא</option>
+              </select>
+            </div>
             <div>
               <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
