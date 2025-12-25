@@ -21,7 +21,16 @@ export function TranslationProvider({ children }: { children: React.ReactNode })
     const savedLang = localStorage.getItem("language") as Language;
     if (savedLang && translations[savedLang]) {
       setLanguageState(savedLang);
-      setIsRTL(rtlLanguages.includes(savedLang));
+      const isRtl = rtlLanguages.includes(savedLang);
+      setIsRTL(isRtl);
+      document.documentElement.dir = isRtl ? "rtl" : "ltr";
+      document.documentElement.lang = savedLang;
+    } else {
+      // Default to Hebrew
+      setLanguageState("he");
+      setIsRTL(true);
+      document.documentElement.dir = "rtl";
+      document.documentElement.lang = "he";
     }
   }, []);
 
