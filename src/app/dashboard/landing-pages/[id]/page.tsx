@@ -350,11 +350,7 @@ export default function EditLandingPagePage({
 
         {/* Center - Preview */}
         <div className="flex-1 overflow-y-auto bg-zinc-100">
-          <div className={`min-h-full bg-white shadow-2xl border border-zinc-200 ${
-            sections.some(s => s.data.width === "full") 
-              ? "w-full" 
-              : "max-w-4xl mx-auto p-8 rounded-xl"
-          }`}>
+          <div className="min-h-full bg-white shadow-2xl border border-zinc-200 w-full">
             {sections.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-zinc-700 mb-2 font-medium">אין סקשנים עדיין</p>
