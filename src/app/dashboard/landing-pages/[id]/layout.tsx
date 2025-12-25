@@ -3,10 +3,8 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { SubscriptionBanner } from "@/components/dashboard/SubscriptionBanner";
 
-export default function DashboardLayout({
+export default function LandingPageBuilderLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -35,15 +33,6 @@ export default function DashboardLayout({
     return null;
   }
 
-  return (
-    <div className="flex min-h-screen bg-zinc-100" dir="rtl">
-      <Sidebar />
-      <main className="flex-1 p-8">
-        <div className="max-w-7xl mx-auto">
-          <SubscriptionBanner />
-          {children}
-        </div>
-      </main>
-    </div>
-  );
+  return <div className="min-h-screen bg-zinc-100" dir="rtl">{children}</div>;
 }
+

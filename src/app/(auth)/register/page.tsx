@@ -90,18 +90,18 @@ export default function RegisterPage() {
   const getSlugStatusIcon = () => {
     switch (slugStatus) {
       case "checking":
-        return <div className="w-4 h-4 border-2 border-white/40 border-t-transparent rounded-full animate-spin" />;
+        return <div className="w-4 h-4 border-2 border-zinc-400 border-t-transparent rounded-full animate-spin" />;
       case "available":
-        return <FiCheck className="text-green-400" />;
+        return <FiCheck className="text-emerald-600" />;
       case "taken":
-        return <FiX className="text-red-400" />;
+        return <FiX className="text-red-600" />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-zinc-100">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -113,11 +113,11 @@ export default function RegisterPage() {
         </div>
 
         {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
-          <h2 className="text-2xl font-bold text-white text-center mb-2">
+        <div className="bg-white border border-zinc-200 rounded-xl p-8 shadow-lg">
+          <h2 className="text-2xl font-bold text-zinc-900 text-center mb-2 tracking-tight">
             הרשמה
           </h2>
-          <p className="text-white/60 text-center mb-6">
+          <p className="text-zinc-600 text-center mb-6">
             7 ימי ניסיון בחינם!
           </p>
 
@@ -178,17 +178,17 @@ export default function RegisterPage() {
               />
               <div className="flex items-center gap-2 mt-2 justify-end">
                 {getSlugStatusIcon()}
-                <span className="text-sm text-white/60">
+                <span className="text-sm text-zinc-600">
                   {formData.slug && `linkhub.com/${formData.slug}`}
                 </span>
               </div>
               {slugStatus === "taken" && (
-                <p className="text-sm text-red-400 mt-1 text-right">
+                <p className="text-sm text-red-600 mt-1 text-right">
                   הסלאג הזה כבר תפוס
                 </p>
               )}
               {slugStatus === "available" && (
-                <p className="text-sm text-green-400 mt-1 text-right">
+                <p className="text-sm text-emerald-600 mt-1 text-right">
                   הסלאג פנוי!
                 </p>
               )}
@@ -204,11 +204,11 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="text-center text-white/60 mt-6">
+          <p className="text-center text-zinc-600 mt-6">
             כבר יש לך חשבון?{" "}
             <Link
               href="/login"
-              className="text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="text-zinc-900 hover:text-zinc-700 font-medium transition-colors"
             >
               התחבר
             </Link>

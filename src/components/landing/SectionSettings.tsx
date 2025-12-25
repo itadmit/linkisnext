@@ -40,52 +40,52 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "hero" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תת-כותרת
               </label>
               <input
                 type="text"
                 value={section.data.subtitle || ""}
                 onChange={(e) => updateData("subtitle", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 טקסט כפתור
               </label>
               <input
                 type="text"
                 value={section.data.ctaText || ""}
                 onChange={(e) => updateData("ctaText", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כתובת כפתור
               </label>
               <input
                 type="text"
                 value={section.data.ctaUrl || ""}
                 onChange={(e) => updateData("ctaUrl", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                 dir="ltr"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תמונת רקע
               </label>
               <ImageUpload
@@ -94,7 +94,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -105,7 +105,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע טקסט
               </label>
               <input
@@ -116,13 +116,13 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 גודל כותרת
               </label>
               <select
                 value={section.data.titleSize || "4xl"}
                 onChange={(e) => updateData("titleSize", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value="2xl">קטן</option>
                 <option value="3xl">בינוני</option>
@@ -131,13 +131,13 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 יישור טקסט
               </label>
               <select
                 value={section.data.textAlign || "center"}
                 onChange={(e) => updateData("textAlign", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value="right">ימין</option>
                 <option value="center">מרכז</option>
@@ -145,13 +145,13 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 גובה סקשן
               </label>
               <select
                 value={section.data.height || "normal"}
                 onChange={(e) => updateData("height", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value="small">קטן</option>
                 <option value="normal">רגיל</option>
@@ -166,24 +166,24 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "features" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת סקשן
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 מספר עמודות
               </label>
               <select
                 value={section.data.columns || 3}
                 onChange={(e) => updateData("columns", parseInt(e.target.value))}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value={2}>2</option>
                 <option value={3}>3</option>
@@ -191,7 +191,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -202,22 +202,22 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תכונות
               </label>
               <div className="space-y-2">
                 {section.data.items?.map((item: any, index: number) => (
-                  <div key={index} className="bg-white/5 rounded-lg p-2">
+                  <div key={index} className="bg-zinc-50 border border-zinc-200 rounded-lg p-2 shadow-sm">
                     <div className="flex items-center gap-2 mb-2">
                       {item.icon && (
-                        <IconRenderer iconValue={item.icon} size={20} className="text-white" />
+                        <IconRenderer iconValue={item.icon} size={20} className="text-zinc-600" />
                       )}
                       <button
                         onClick={() => {
                           setIconPickerIndex(index);
                           setIconPickerOpen(true);
                         }}
-                        className="px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-xs"
+                        className="px-2 py-1 bg-white hover:bg-zinc-50 border border-zinc-200 rounded text-zinc-700 text-xs shadow-sm"
                       >
                         {item.icon ? "שנה אייקון" : "בחר אייקון"}
                       </button>
@@ -231,7 +231,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], title: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm mb-1"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm mb-1 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                     />
                     <input
                       type="text"
@@ -242,7 +242,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], description: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                     />
                   </div>
                 ))}
@@ -251,7 +251,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                     const newItems = [...(section.data.items || []), { icon: "FiStar", title: "", description: "" }];
                     updateData("items", newItems);
                   }}
-                  className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-sm"
+                  className="w-full px-3 py-2 bg-white hover:bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-900 text-sm shadow-sm transition-colors"
                 >
                   + הוסף תכונה
                 </button>
@@ -281,24 +281,24 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "testimonials" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת סקשן
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 מספר עמודות
               </label>
               <select
                 value={section.data.columns || 2}
                 onChange={(e) => updateData("columns", parseInt(e.target.value))}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value={1}>1</option>
                 <option value={2}>2</option>
@@ -306,7 +306,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -317,12 +317,12 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 המלצות
               </label>
               <div className="space-y-2">
                 {section.data.items?.map((item: any, index: number) => (
-                  <div key={index} className="bg-white/5 rounded-lg p-2">
+                  <div key={index} className="bg-zinc-50 border border-zinc-200 rounded-lg p-2 shadow-sm">
                     <div className="mb-2">
                       <ImageUpload
                         value={item.avatar || ""}
@@ -343,7 +343,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], name: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm mb-1"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm mb-1 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                     />
                     <input
                       type="text"
@@ -354,7 +354,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], role: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm mb-1"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm mb-1 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                     />
                     <textarea
                       placeholder="המלצה"
@@ -364,7 +364,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], text: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                       rows={2}
                     />
                   </div>
@@ -374,7 +374,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                     const newItems = [...(section.data.items || []), { name: "", role: "", text: "", avatar: null }];
                     updateData("items", newItems);
                   }}
-                  className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-sm"
+                  className="w-full px-3 py-2 bg-white hover:bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-900 text-sm shadow-sm transition-colors"
                 >
                   + הוסף המלצה
                 </button>
@@ -387,29 +387,29 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "about" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תוכן
               </label>
               <textarea
                 value={section.data.content || ""}
                 onChange={(e) => updateData("content", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                 rows={5}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תמונה
               </label>
               <ImageUpload
@@ -418,20 +418,20 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 מיקום תמונה
               </label>
               <select
                 value={section.data.imagePosition || "right"}
                 onChange={(e) => updateData("imagePosition", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value="left">שמאל</option>
                 <option value="right">ימין</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -442,7 +442,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע טקסט
               </label>
               <input
@@ -459,52 +459,52 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "cta" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תיאור
               </label>
               <input
                 type="text"
                 value={section.data.description || ""}
                 onChange={(e) => updateData("description", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 טקסט כפתור
               </label>
               <input
                 type="text"
                 value={section.data.ctaText || ""}
                 onChange={(e) => updateData("ctaText", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כתובת כפתור
               </label>
               <input
                 type="text"
                 value={section.data.ctaUrl || ""}
                 onChange={(e) => updateData("ctaUrl", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                 dir="ltr"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -515,7 +515,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע טקסט
               </label>
               <input
@@ -526,7 +526,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע כפתור
               </label>
               <input
@@ -537,7 +537,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע טקסט כפתור
               </label>
               <input
@@ -554,18 +554,18 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "faq" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת סקשן
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -576,12 +576,12 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 שאלות ותשובות
               </label>
               <div className="space-y-2">
                 {section.data.items?.map((item: any, index: number) => (
-                  <div key={index} className="bg-white/5 rounded-lg p-2">
+                  <div key={index} className="bg-zinc-50 border border-zinc-200 rounded-lg p-2 shadow-sm">
                     <input
                       type="text"
                       placeholder="שאלה"
@@ -591,7 +591,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], question: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm mb-1"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm mb-1 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                     />
                     <textarea
                       placeholder="תשובה"
@@ -601,7 +601,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                         newItems[index] = { ...newItems[index], answer: e.target.value };
                         updateData("items", newItems);
                       }}
-                      className="w-full px-2 py-1 bg-white/10 border border-white/20 rounded text-white text-sm"
+                      className="w-full px-2 py-1 bg-white border border-zinc-200 rounded text-zinc-900 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                       rows={2}
                     />
                   </div>
@@ -611,7 +611,7 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
                     const newItems = [...(section.data.items || []), { question: "", answer: "" }];
                     updateData("items", newItems);
                   }}
-                  className="w-full px-3 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-sm"
+                  className="w-full px-3 py-2 bg-white hover:bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-900 text-sm shadow-sm transition-colors"
                 >
                   + הוסף שאלה
                 </button>
@@ -624,29 +624,29 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
         {section.type === "contact-form" && (
           <>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 כותרת
               </label>
               <input
                 type="text"
                 value={section.data.title || ""}
                 onChange={(e) => updateData("title", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 תיאור
               </label>
               <textarea
                 value={section.data.description || ""}
                 onChange={(e) => updateData("description", e.target.value)}
-                className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                 rows={3}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 צבע רקע
               </label>
               <input
@@ -657,12 +657,12 @@ export function SectionSettings({ section, onUpdate }: SectionSettingsProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">
+              <label className="block text-sm font-medium text-zinc-700 mb-2">
                 שדות טופס
               </label>
               <div className="space-y-2">
                 {["name", "email", "phone", "message"].map((field) => (
-                  <label key={field} className="flex items-center gap-2 text-white/80 text-sm">
+                  <label key={field} className="flex items-center gap-2 text-zinc-700 text-sm">
                     <input
                       type="checkbox"
                       checked={section.data.formFields?.includes(field) ?? true}

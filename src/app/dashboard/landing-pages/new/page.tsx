@@ -43,9 +43,9 @@ export default function NewLandingPagePage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-white mb-8">דף נחיתה חדש</h1>
+      <h1 className="text-2xl font-bold text-zinc-900 tracking-tight mb-8">דף נחיתה חדש</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6" dir="rtl">
+      <form onSubmit={handleSubmit} className="space-y-6 bg-white border border-zinc-200 rounded-xl p-6 shadow-sm" dir="rtl">
         <Input
           label="שם הדף"
           placeholder="דף נחיתה למוצר X"
@@ -69,17 +69,17 @@ export default function NewLandingPagePage() {
             className="text-left"
             required
           />
-          <p className="text-white/60 text-sm mt-1">
+          <p className="text-zinc-500 text-sm mt-1">
             הכתובת תהיה: yourdomain.com/landing/{formData.slug || "[סלאג]"}
           </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">
+          <label className="block text-sm font-medium text-zinc-700 mb-2">
             תיאור (אופציונלי)
           </label>
           <textarea
-            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+            className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent resize-none"
             rows={3}
             placeholder="תיאור קצר של דף הנחיתה..."
             value={formData.description}

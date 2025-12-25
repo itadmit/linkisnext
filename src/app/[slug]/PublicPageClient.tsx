@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FiCopy, FiCheck, FiExternalLink } from "react-icons/fi";
+import { FiCopy, FiCheck, FiExternalLink, FiGift } from "react-icons/fi";
 import { SocialIcons } from "@/components/public/SocialIcons";
 import { IconRenderer } from "@/lib/icons";
 import toast from "react-hot-toast";

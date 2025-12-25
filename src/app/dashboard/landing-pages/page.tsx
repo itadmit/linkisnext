@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { FiPlus, FiEdit2, FiTrash2, FiEye, FiEyeOff, FiExternalLink } from "react-icons/fi";
+import { FiPlus, FiEdit2, FiTrash2, FiEye, FiEyeOff, FiExternalLink, FiMail } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 interface LandingPage {
@@ -82,7 +82,7 @@ export default function LandingPagesPage() {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -92,8 +92,8 @@ export default function LandingPagesPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">דפי נחיתה</h1>
-          <p className="text-white/60 mt-1">
+          <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">דפי נחיתה</h1>
+          <p className="text-zinc-500 text-sm mt-1">
             צור וניהול דפי נחיתה מותאמים אישית
           </p>
         </div>
@@ -105,17 +105,17 @@ export default function LandingPagesPage() {
 
       {/* Landing Pages List */}
       {landingPages.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FiPlus size={32} className="text-white/40" />
+        <div className="text-center py-24 border border-dashed border-zinc-200 rounded-xl bg-white/50">
+          <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 border border-zinc-100 shadow-sm">
+            <FiPlus size={24} className="text-zinc-400" />
           </div>
-          <h3 className="text-xl font-semibold text-white mb-2">
+          <h3 className="text-lg font-semibold text-zinc-900 mb-2">
             אין לך דפי נחיתה עדיין
           </h3>
-          <p className="text-white/60 mb-6">
-            התחל ליצור דף נחיתה מותאם אישית
+          <p className="text-zinc-500 text-sm mb-8 max-w-xs mx-auto">
+            התחל ליצור דף נחיתה מותאם אישית עם בילדר חזותי מתקדם
           </p>
-          <Button onClick={() => router.push("/dashboard/landing-pages/new")}>
+          <Button onClick={() => router.push("/dashboard/landing-pages/new")} size="lg">
             <FiPlus className="ml-2" />
             צור דף נחיתה ראשון
           </Button>
@@ -125,35 +125,35 @@ export default function LandingPagesPage() {
           {landingPages.map((page) => (
             <div
               key={page.id}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-200"
+              className="bg-white border border-zinc-200 rounded-xl p-6 hover:border-zinc-300 hover:shadow-lg transition-all duration-200 shadow-sm"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-1">
+                  <h3 className="text-lg font-semibold text-zinc-900 mb-1">
                     {page.name}
                   </h3>
                   {page.description && (
-                    <p className="text-white/60 text-sm">{page.description}</p>
+                    <p className="text-zinc-500 text-sm">{page.description}</p>
                   )}
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  className={`px-3 py-1 rounded-lg text-xs font-medium ${
                     page.status === "published"
-                      ? "bg-green-500/20 text-green-400"
-                      : "bg-gray-500/20 text-gray-400"
+                      ? "bg-emerald-50 text-emerald-700 border border-emerald-100"
+                      : "bg-zinc-100 text-zinc-600 border border-zinc-200"
                   }`}
                 >
                   {page.status === "published" ? "פורסם" : "טיוטה"}
                 </span>
               </div>
 
-              <div className="flex items-center gap-4 mb-4 text-sm text-white/60">
-                <div className="flex items-center gap-1">
+              <div className="flex items-center gap-4 mb-4 text-sm text-zinc-500">
+                <div className="flex items-center gap-1.5">
                   <FiEye size={16} />
                   <span>{page.views} צפיות</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span>📧</span>
+                <div className="flex items-center gap-1.5">
+                  <FiMail size={16} />
                   <span>{page._count.leads} לידים</span>
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function LandingPagesPage() {
                     href={`/landing/${page.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                    className="p-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition-colors border border-zinc-200"
                   >
                     <FiExternalLink size={14} />
                   </a>
@@ -195,7 +195,7 @@ export default function LandingPagesPage() {
                   variant="secondary"
                   size="sm"
                   onClick={() => handleDelete(page.id, page.name)}
-                  className="text-red-400 hover:text-red-300 hover:bg-red-500/20"
+                  className="text-red-600 hover:text-red-700 hover:bg-red-50"
                 >
                   <FiTrash2 size={14} />
                 </Button>

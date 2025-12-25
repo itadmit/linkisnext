@@ -1,15 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  /* Clean Light Theme based on Cursor/Vercel style */
-  --background: #ffffff;
-  --foreground: #09090b; /* Zinc 950 */
-  --sidebar-bg: #fafafa; /* Zinc 50 */
+  /* Cursor-inspired Palette */
+  /* Backgrounds: Warm/Stone Grays */
+  --background: #f4f4f5; /* Zinc 100/Stone-ish - Main app background */
+  --foreground: #18181b; /* Zinc 900 - Main text */
+  
+  --sidebar-bg: #ffffff; /* White Sidebar */
   --sidebar-border: #e4e4e7; /* Zinc 200 */
-  --card-bg: #ffffff;
+  
+  --card-bg: #ffffff; /* White cards to pop against --background */
   --card-border: #e4e4e7; /* Zinc 200 */
-  --muted: #f4f4f5; /* Zinc 100 */
-  --muted-foreground: #71717a; /* Zinc 500 */
+  
+  /* Status Colors - Subtle/Pastel */
+  --success-bg: #ecfdf5; /* Emerald 50 */
+  --success-text: #047857; /* Emerald 700 */
+  --error-bg: #fef2f2; /* Red 50 */
+  --error-text: #b91c1c; /* Red 700 */
+  --warning-bg: #fffbeb; /* Amber 50 */
+  --warning-text: #b45309; /* Amber 700 */
 }
 
 body {
@@ -21,7 +30,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar - Light Minimalist */
+/* Custom scrollbar - Refined */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -32,23 +41,23 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8; /* Zinc 300 */
+  background: #d4d4d8;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa; /* Zinc 400 */
+  background: #a1a1aa;
 }
 
 /* Selection */
 ::selection {
-  background: #000000;
-  color: #ffffff;
+  background: #e4e4e7; /* Subtle gray selection */
+  color: #000000;
 }
 
 /* Utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 0, 0, 0.05);
 }

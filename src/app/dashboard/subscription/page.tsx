@@ -68,7 +68,7 @@ function SubscriptionContent() {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -77,29 +77,29 @@ function SubscriptionContent() {
     switch (subscription?.subscriptionStatus) {
       case "trial":
         return (
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/20 text-amber-400 rounded-full">
-            <FiClock />
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-lg border border-amber-100 font-medium">
+            <FiClock size={16} />
             תקופת ניסיון
           </span>
         );
       case "active":
         return (
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-400 rounded-full">
-            <FiCheck />
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100 font-medium">
+            <FiCheck size={16} />
             מנוי פעיל
           </span>
         );
       case "cancelled":
         return (
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-400 rounded-full">
-            <FiAlertTriangle />
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-red-700 rounded-lg border border-red-100 font-medium">
+            <FiAlertTriangle size={16} />
             מנוי בוטל
           </span>
         );
       case "expired":
         return (
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-400 rounded-full">
-            <FiAlertTriangle />
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-red-700 rounded-lg border border-red-100 font-medium">
+            <FiAlertTriangle size={16} />
             פג תוקף
           </span>
         );
@@ -126,23 +126,23 @@ function SubscriptionContent() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-white mb-8">המנוי שלי</h1>
+    <div className="max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold text-zinc-900 tracking-tight mb-8">המנוי שלי</h1>
 
       {/* Current Status */}
-      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8">
+      <div className="bg-white border border-zinc-200 rounded-xl p-6 mb-6 shadow-sm">
         <div className="flex items-center justify-between mb-6">
           <div className="text-right">
-            <h2 className="text-xl font-semibold text-white mb-2">
+            <h2 className="text-lg font-semibold text-zinc-900 mb-2">
               סטטוס המנוי
             </h2>
             {subscription?.subscriptionStatus === "trial" && (
-              <p className="text-white/60">
+              <p className="text-zinc-500 text-sm">
                 נותרו {daysLeft()} ימים לתקופת הניסיון
               </p>
             )}
             {subscription?.subscriptionStatus === "active" && (
-              <p className="text-white/60">
+              <p className="text-zinc-500 text-sm">
                 בתוקף עד {formatDate(subscription.subscriptionEndsAt)}
               </p>
             )}
@@ -153,36 +153,36 @@ function SubscriptionContent() {
         {/* Trial/Expired - Show PayPal */}
         {(subscription?.subscriptionStatus === "trial" ||
           subscription?.subscriptionStatus === "expired") && (
-          <div className="border-t border-white/10 pt-6">
-            <h3 className="text-lg font-semibold text-white mb-4">
+          <div className="border-t border-zinc-100 pt-6">
+            <h3 className="text-base font-semibold text-zinc-900 mb-4">
               שדרג למנוי פרימיום
             </h3>
-            <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 rounded-xl p-6 mb-6">
+            <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="text-3xl font-bold text-white">
-                  $10<span className="text-lg text-white/60">/חודש</span>
+                <div className="text-3xl font-bold text-zinc-900">
+                  $10<span className="text-lg text-zinc-500">/חודש</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-white font-medium">מנוי חודשי</p>
-                  <p className="text-white/60 text-sm">כל התכונות כלולות</p>
+                  <p className="text-zinc-900 font-semibold">מנוי חודשי</p>
+                  <p className="text-zinc-500 text-sm">כל התכונות כלולות</p>
                 </div>
               </div>
-              <ul className="text-white/80 space-y-2 text-right mb-6">
+              <ul className="text-zinc-700 space-y-2 text-right mb-6">
                 <li className="flex items-center gap-2 justify-end">
-                  <span>לינקים ללא הגבלה</span>
-                  <FiCheck className="text-green-400" />
+                  <span className="text-sm">לינקים ללא הגבלה</span>
+                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
                 </li>
                 <li className="flex items-center gap-2 justify-end">
-                  <span>אנליטיקס מתקדם</span>
-                  <FiCheck className="text-green-400" />
+                  <span className="text-sm">אנליטיקס מתקדם</span>
+                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
                 </li>
                 <li className="flex items-center gap-2 justify-end">
-                  <span>עיצוב מותאם אישית</span>
-                  <FiCheck className="text-green-400" />
+                  <span className="text-sm">עיצוב מותאם אישית</span>
+                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
                 </li>
                 <li className="flex items-center gap-2 justify-end">
-                  <span>קופונים חכמים</span>
-                  <FiCheck className="text-green-400" />
+                  <span className="text-sm">קופונים חכמים</span>
+                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
                 </li>
               </ul>
             </div>
@@ -212,7 +212,7 @@ function SubscriptionContent() {
                 }}
               />
             </div>
-            <p className="text-white/40 text-sm text-center mt-4">
+            <p className="text-zinc-400 text-xs text-center mt-4">
               התשלום מאובטח דרך PayPal
             </p>
           </div>
@@ -220,11 +220,11 @@ function SubscriptionContent() {
 
         {/* Active subscription - Show cancel button */}
         {subscription?.subscriptionStatus === "active" && (
-          <div className="border-t border-white/10 pt-6">
+          <div className="border-t border-zinc-100 pt-6">
             <Button variant="danger" onClick={handleCancel}>
               בטל מנוי
             </Button>
-            <p className="text-white/40 text-sm mt-2">
+            <p className="text-zinc-500 text-sm mt-2">
               המנוי ימשיך לפעול עד {formatDate(subscription.subscriptionEndsAt)}
             </p>
           </div>
@@ -232,8 +232,8 @@ function SubscriptionContent() {
       </div>
 
       {/* Features included */}
-      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-        <h3 className="text-lg font-semibold text-white mb-4">
+      <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
+        <h3 className="text-base font-semibold text-zinc-900 mb-4">
           מה כלול במנוי
         </h3>
         <div className="grid grid-cols-2 gap-4">
@@ -249,10 +249,10 @@ function SubscriptionContent() {
           ].map((feature) => (
             <div
               key={feature}
-              className="flex items-center gap-2 text-white/80 justify-end"
+              className="flex items-center gap-2 text-zinc-700 justify-end text-sm"
             >
               <span>{feature}</span>
-              <FiCheck className="text-green-400 shrink-0" />
+              <FiCheck className="text-emerald-600 shrink-0" size={16} />
             </div>
           ))}
         </div>

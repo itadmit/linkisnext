@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { FiLink, FiBarChart2, FiClock, FiSmartphone, FiZap, FiShield, FiArrowDown, FiCheck } from "react-icons/fi";
+import { FiLink, FiBarChart2, FiClock, FiSmartphone, FiZap, FiShield, FiArrowDown, FiCheck, FiStar, FiSend, FiCamera, FiTwitter, FiYoutube, FiGlobe, FiGift, FiUser } from "react-icons/fi";
 
 const features = [
   {
@@ -44,19 +44,19 @@ const testimonials = [
     name: "יוסי כהן",
     role: "יוצר תוכן",
     text: "מאז שעברתי ל-LinkHub, ראיתי עלייה של 40% בקליקים! הממשק פשוט מדהים.",
-    avatar: "👨‍💻",
+    avatar: FiUser,
   },
   {
     name: "מיכל לוי",
     role: "בלוגרית",
     text: "הקופונים החכמים עוזרים לי לשתף הנחות עם העוקבים שלי בקלות רבה.",
-    avatar: "👩‍🎤",
+    avatar: FiUser,
   },
   {
     name: "דני אברהם",
     role: "בעל עסק",
     text: "האנליטיקס המתקדם נותן לי תובנות חשובות על הקהל שלי. ממליץ בחום!",
-    avatar: "👨‍💼",
+    avatar: FiUser,
   },
 ];
 
@@ -111,8 +111,9 @@ export default function HomePage() {
               mounted ? "animate-bounce-in" : "opacity-0"
             }`}
           >
-            <span className="text-indigo-400 text-sm font-medium">
-              ✨ 7 ימי ניסיון בחינם
+            <span className="text-indigo-400 text-sm font-medium flex items-center gap-2">
+              <FiStar size={16} />
+              7 ימי ניסיון בחינם
             </span>
           </div>
           <h2
@@ -160,34 +161,40 @@ export default function HomePage() {
         >
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-white/10 shadow-2xl">
             <div className="text-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl shadow-lg shadow-indigo-500/30">
-                🚀
+              <div className="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <FiSend className="text-white" size={32} />
               </div>
               <h3 className="text-xl font-bold text-white">השם שלך</h3>
               <p className="text-white/60 text-sm">מפתח | יוצר תוכן</p>
               <div className="flex justify-center gap-2 mt-3">
-                {["📸", "🐦", "📺"].map((emoji, i) => (
+                {[FiCamera, FiTwitter, FiYoutube].map((Icon, i) => (
                   <div
                     key={i}
                     className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"
                   >
-                    {emoji}
+                    <Icon className="text-white" size={16} />
                   </div>
                 ))}
               </div>
             </div>
             <div className="space-y-3">
-              {["האתר שלי 🌐", "יוטיוב 📺", "טוויטר 🐦"].map((text, i) => (
+              {[
+                { text: "האתר שלי", icon: FiGlobe },
+                { text: "יוטיוב", icon: FiYoutube },
+                { text: "טוויטר", icon: FiTwitter },
+              ].map((item, i) => (
                 <div
-                  key={text}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white text-center py-3 rounded-xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
+                  key={item.text}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white text-center py-3 rounded-xl transition-all duration-200 cursor-pointer hover:scale-[1.02] flex items-center justify-center gap-2"
                   style={{ animationDelay: `${i * 0.1}s` }}
                 >
-                  {text}
+                  <item.icon size={18} />
+                  {item.text}
                 </div>
               ))}
-              <div className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-center py-3 rounded-xl transition-all duration-200 cursor-pointer hover:scale-[1.02]">
-                🎁 קופון: SAVE20
+              <div className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-center py-3 rounded-xl transition-all duration-200 cursor-pointer hover:scale-[1.02] flex items-center justify-center gap-2">
+                <FiGift size={18} />
+                קופון: SAVE20
               </div>
             </div>
           </div>
@@ -242,8 +249,11 @@ export default function HomePage() {
                 className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center text-xl">
-                    {testimonial.avatar}
+                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
+                    {(() => {
+                      const AvatarIcon = testimonial.avatar;
+                      return <AvatarIcon className="text-white" size={24} />;
+                    })()}
                   </div>
                   <div className="text-right">
                     <p className="text-white font-medium">{testimonial.name}</p>

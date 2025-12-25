@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { FiSave, FiEye, FiArrowRight, FiTarget, FiZap, FiMessageCircle, FiBook, FiSend, FiMail, FiHelpCircle } from "react-icons/fi";
+import { FiSave, FiEye, FiArrowRight, FiTarget, FiZap, FiMessageCircle, FiBook, FiSend, FiMail, FiHelpCircle, FiArrowLeft, FiChevronUp, FiChevronDown, FiTrash2 } from "react-icons/fi";
 import { IconRenderer } from "@/lib/icons";
 import { SectionSettings } from "@/components/landing/SectionSettings";
 import toast from "react-hot-toast";
@@ -237,8 +237,8 @@ export default function EditLandingPagePage({
 
   if (isLoading) {
     return (
-      <div className="flex justify-center py-12">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+      <div className="flex justify-center items-center h-screen bg-zinc-100">
+        <div className="w-6 h-6 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -250,12 +250,22 @@ export default function EditLandingPagePage({
   const selectedSection = sections.find((s) => s.id === selectedSectionId);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col bg-zinc-100">
       {/* Header */}
-      <div className="bg-slate-900/50 border-b border-white/10 p-4 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white">{landingPage.name}</h1>
-          <p className="text-white/60 text-sm">עורך דף נחיתה</p>
+      <div className="bg-white border-b border-zinc-200 shadow-sm p-4 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="secondary"
+            onClick={() => router.push("/dashboard/landing-pages")}
+            className="shrink-0"
+          >
+            <FiArrowLeft className="ml-2" />
+            חזור לדשבורד
+          </Button>
+          <div>
+            <h1 className="text-xl font-bold text-zinc-900">{landingPage.name}</h1>
+            <p className="text-zinc-500 text-sm">עורך דף נחיתה</p>
+          </div>
         </div>
         <div className="flex items-center gap-3">
           <Button variant="secondary" onClick={handleSave} isLoading={isSaving}>
@@ -293,8 +303,8 @@ export default function EditLandingPagePage({
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar - Available Sections */}
-        <div className="w-64 bg-slate-900/30 border-r border-white/10 p-4 overflow-y-auto">
-          <h3 className="text-white font-semibold mb-4">הוסף סקשן</h3>
+        <div className="w-64 bg-white border-l border-zinc-200 p-4 overflow-y-auto shadow-sm">
+          <h3 className="text-zinc-900 font-semibold mb-4 text-sm">הוסף סקשן</h3>
           <div className="space-y-2">
             {[
               { type: "hero", label: "Hero", icon: FiTarget },
@@ -310,10 +320,10 @@ export default function EditLandingPagePage({
                 <button
                   key={section.type}
                   onClick={() => addSection(section.type)}
-                  className="w-full p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-right transition-all duration-200 flex items-center gap-2"
+                  className="w-full p-3 bg-white hover:bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-900 text-right transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md"
                 >
-                  <IconComponent size={18} />
-                  <span>{section.label}</span>
+                  <IconComponent size={18} className="text-zinc-600" />
+                  <span className="text-sm font-medium">{section.label}</span>
                 </button>
               );
             })}
@@ -321,12 +331,12 @@ export default function EditLandingPagePage({
         </div>
 
         {/* Center - Preview */}
-        <div className="flex-1 overflow-y-auto bg-gray-50 p-8">
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg min-h-full p-8">
+        <div className="flex-1 overflow-y-auto bg-zinc-100 p-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg min-h-full p-8 border border-zinc-200">
             {sections.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-gray-500 mb-4">אין סקשנים עדיין</p>
-                <p className="text-gray-400 text-sm">
+                <p className="text-zinc-700 mb-2 font-medium">אין סקשנים עדיין</p>
+                <p className="text-zinc-500 text-sm">
                   לחץ על סקשן מהסיידבר כדי להוסיף
                 </p>
               </div>
@@ -335,10 +345,10 @@ export default function EditLandingPagePage({
                 {sections.map((section, index) => (
                   <div
                     key={section.id}
-                    className={`border-2 rounded-lg p-4 transition-all ${
+                    className={`border-2 rounded-xl p-4 transition-all bg-white shadow-sm ${
                       selectedSectionId === section.id
-                        ? "border-indigo-500 bg-indigo-50"
-                        : "border-transparent hover:border-gray-200"
+                        ? "border-zinc-900 bg-zinc-50 shadow-md"
+                        : "border-zinc-200 hover:border-zinc-300 hover:shadow-md"
                     }`}
                     onClick={() => setSelectedSectionId(section.id)}
                   >
@@ -468,16 +478,17 @@ export default function EditLandingPagePage({
                     </div>
 
                     {/* Section Actions */}
-                    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-200">
+                    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-zinc-200">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           if (index > 0) moveSection(index, index - 1);
                         }}
-                        className="text-gray-400 hover:text-gray-600 text-sm"
+                        className="p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         disabled={index === 0}
+                        title="הזז למעלה"
                       >
-                        ↑
+                        <FiChevronUp size={16} />
                       </button>
                       <button
                         onClick={(e) => {
@@ -485,19 +496,21 @@ export default function EditLandingPagePage({
                           if (index < sections.length - 1)
                             moveSection(index, index + 1);
                         }}
-                        className="text-gray-400 hover:text-gray-600 text-sm"
+                        className="p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         disabled={index === sections.length - 1}
+                        title="הזז למטה"
                       >
-                        ↓
+                        <FiChevronDown size={16} />
                       </button>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           deleteSection(section.id);
                         }}
-                        className="text-red-400 hover:text-red-600 text-sm mr-auto"
+                        className="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors mr-auto"
+                        title="מחק סקשן"
                       >
-                        מחק
+                        <FiTrash2 size={16} />
                       </button>
                     </div>
                   </div>
@@ -509,8 +522,8 @@ export default function EditLandingPagePage({
 
         {/* Right Sidebar - Section Settings */}
         {selectedSection && (
-          <div className="w-80 bg-slate-900/30 border-l border-white/10 p-4 overflow-y-auto">
-            <h3 className="text-white font-semibold mb-4">הגדרות סקשן</h3>
+          <div className="w-80 bg-white border-r border-zinc-200 p-4 overflow-y-auto shadow-sm">
+            <h3 className="text-zinc-900 font-semibold mb-4 text-sm">הגדרות סקשן</h3>
             <SectionSettings
               section={selectedSection}
               onUpdate={(updates) => updateSection(selectedSection.id, updates)}

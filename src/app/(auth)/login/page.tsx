@@ -43,7 +43,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-zinc-100">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -55,8 +55,8 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
-          <h2 className="text-2xl font-bold text-white text-center mb-6">
+        <div className="bg-white border border-zinc-200 rounded-xl p-8 shadow-lg">
+          <h2 className="text-2xl font-bold text-zinc-900 text-center mb-6 tracking-tight">
             התחברות
           </h2>
 
@@ -94,11 +94,11 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <p className="text-center text-white/60 mt-6">
+          <p className="text-center text-zinc-600 mt-6">
             אין לך חשבון?{" "}
             <Link
               href="/register"
-              className="text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="text-zinc-900 hover:text-zinc-700 font-medium transition-colors"
             >
               הירשם עכשיו
             </Link>

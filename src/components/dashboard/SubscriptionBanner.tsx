@@ -44,18 +44,20 @@ export function SubscriptionBanner() {
 
   return (
     <div
-      className={`mb-6 rounded-lg p-4 flex items-center justify-between border backdrop-blur-sm ${
+      className={`mb-6 rounded-lg p-4 flex items-center justify-between border shadow-sm ${
         isExpired
-          ? "bg-red-50 border-red-200"
+          ? "bg-red-50/50 border-red-100"
           : isUrgent
-          ? "bg-amber-50 border-amber-200"
-          : "bg-white border-zinc-200 shadow-sm"
+          ? "bg-amber-50/50 border-amber-100"
+          : "bg-white border-zinc-200"
       }`}
     >
       <div className="flex items-center gap-3">
         {isExpired ? (
           <>
-            <FiAlertTriangle className="text-red-600 shrink-0" size={18} />
+            <div className="p-2 bg-red-100 rounded-full text-red-600">
+              <FiAlertTriangle size={16} />
+            </div>
             <div className="text-right">
               <p className="text-zinc-900 font-medium text-sm">תקופת הניסיון הסתיימה</p>
               <p className="text-zinc-500 text-xs mt-0.5">
@@ -65,10 +67,9 @@ export function SubscriptionBanner() {
           </>
         ) : (
           <>
-            <FiClock
-              className={isUrgent ? "text-amber-600 shrink-0" : "text-zinc-400 shrink-0"}
-              size={18}
-            />
+            <div className={`p-2 rounded-full ${isUrgent ? "bg-amber-100 text-amber-600" : "bg-zinc-100 text-zinc-600"}`}>
+              <FiClock size={16} />
+            </div>
             <div className="text-right">
               <p className="text-zinc-900 font-medium text-sm">
                 נותרו {days} ימים לתקופת הניסיון
@@ -83,7 +84,7 @@ export function SubscriptionBanner() {
       <div className="flex items-center gap-2">
         <Link
           href="/dashboard/subscription"
-          className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-sm ${
             isExpired
               ? "bg-red-600 hover:bg-red-700 text-white"
               : isUrgent
@@ -96,9 +97,9 @@ export function SubscriptionBanner() {
         {!isExpired && (
           <button
             onClick={() => setDismissed(true)}
-            className="p-1.5 text-zinc-400 hover:text-zinc-900 transition-colors rounded-md hover:bg-zinc-100"
+            className="p-2 text-zinc-400 hover:text-zinc-900 transition-colors rounded-lg hover:bg-zinc-100"
           >
-            <FiX size={14} />
+            <FiX size={16} />
           </button>
         )}
       </div>

@@ -122,7 +122,7 @@ export default function LeadsPage() {
   if (isLoading) {
     return (
       <div className="flex justify-center py-12">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -136,8 +136,8 @@ export default function LeadsPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white">מאגר לידים</h1>
-            <p className="text-white/60 mt-1">
+            <h1 className="text-2xl font-bold text-zinc-900 tracking-tight">מאגר לידים</h1>
+            <p className="text-zinc-500 text-sm mt-1">
               כל הלידים שהתקבלו מדפי הנחיתה שלך
             </p>
           </div>
@@ -148,15 +148,15 @@ export default function LeadsPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 mb-6 flex items-center gap-4">
+        <div className="bg-white border border-zinc-200 rounded-xl p-4 mb-6 flex items-center gap-4 shadow-sm">
           <div className="flex items-center gap-2">
-            <FiFilter className="text-white/60" />
-            <span className="text-white/80">סינון:</span>
+            <FiFilter className="text-zinc-500" />
+            <span className="text-zinc-700 font-medium">סינון:</span>
           </div>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+            className="px-4 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
           >
             <option value="all">כל הסטטוסים</option>
             <option value="new">חדש</option>
@@ -166,7 +166,7 @@ export default function LeadsPage() {
           <select
             value={filterLandingPage}
             onChange={(e) => setFilterLandingPage(e.target.value)}
-            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+            className="px-4 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
           >
             <option value="all">כל דפי הנחיתה</option>
             {uniqueLandingPages.map((page) => (
@@ -175,15 +175,15 @@ export default function LeadsPage() {
               </option>
             ))}
           </select>
-          <div className="mr-auto text-white/60">
+          <div className="mr-auto text-zinc-600 font-medium">
             {filteredLeads.length} לידים
           </div>
         </div>
 
         {/* Leads List */}
         {filteredLeads.length === 0 ? (
-          <div className="text-center py-16 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl">
-            <p className="text-white/60">אין לידים להצגה</p>
+          <div className="text-center py-16 bg-white border border-zinc-200 rounded-xl shadow-sm">
+            <p className="text-zinc-500">אין לידים להצגה</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -193,23 +193,23 @@ export default function LeadsPage() {
                 <div
                   key={lead.id}
                   onClick={() => setSelectedLead(lead)}
-                  className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 transition-all ${
-                    selectedLead?.id === lead.id ? "ring-2 ring-indigo-500" : ""
+                  className={`bg-white border border-zinc-200 rounded-xl p-4 cursor-pointer hover:border-zinc-300 hover:shadow-md transition-all shadow-sm ${
+                    selectedLead?.id === lead.id ? "ring-2 ring-zinc-900 border-zinc-900" : ""
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-white font-semibold">
+                        <h3 className="text-zinc-900 font-semibold">
                           {data.name || "ללא שם"}
                         </h3>
                         <span
-                          className={`px-2 py-1 rounded-full text-xs ${
+                          className={`px-2.5 py-1 rounded-lg text-xs font-medium ${
                             lead.status === "new"
-                              ? "bg-blue-500/20 text-blue-400"
+                              ? "bg-blue-50 text-blue-700 border border-blue-100"
                               : lead.status === "contacted"
-                              ? "bg-green-500/20 text-green-400"
-                              : "bg-gray-500/20 text-gray-400"
+                              ? "bg-emerald-50 text-emerald-700 border border-emerald-100"
+                              : "bg-zinc-100 text-zinc-600 border border-zinc-200"
                           }`}
                         >
                           {lead.status === "new"
@@ -219,7 +219,7 @@ export default function LeadsPage() {
                             : "ארכיון"}
                         </span>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-white/60">
+                      <div className="flex items-center gap-4 text-sm text-zinc-500">
                         <span>{data.email || "ללא אימייל"}</span>
                         <span>•</span>
                         <span>{lead.landingPage.name}</span>
@@ -234,7 +234,7 @@ export default function LeadsPage() {
                         e.stopPropagation();
                         setSelectedLead(lead);
                       }}
-                      className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                      className="p-2 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
                     >
                       <FiEye size={18} />
                     </button>
@@ -248,12 +248,12 @@ export default function LeadsPage() {
 
       {/* Sidebar - Lead Details */}
       {selectedLead && (
-        <div className="w-96 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+        <div className="w-96 bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-white">פרטי ליד</h2>
+            <h2 className="text-lg font-bold text-zinc-900">פרטי ליד</h2>
             <button
               onClick={() => setSelectedLead(null)}
-              className="text-white/60 hover:text-white"
+              className="text-zinc-400 hover:text-zinc-900 p-1 hover:bg-zinc-100 rounded-lg transition-colors"
             >
               ✕
             </button>
@@ -262,12 +262,12 @@ export default function LeadsPage() {
           <div className="space-y-4">
             {/* Form Data */}
             <div>
-              <h3 className="text-white font-semibold mb-3">פרטי הטופס</h3>
+              <h3 className="text-zinc-900 font-semibold mb-3 text-sm">פרטי הטופס</h3>
               <div className="space-y-2">
                 {Object.entries(selectedLeadData || {}).map(([key, value]) => (
-                  <div key={key} className="bg-white/5 rounded-lg p-3">
-                    <p className="text-white/60 text-sm mb-1">{key}</p>
-                    <p className="text-white">{String(value)}</p>
+                  <div key={key} className="bg-zinc-50 border border-zinc-100 rounded-lg p-3">
+                    <p className="text-zinc-500 text-xs mb-1 font-medium">{key}</p>
+                    <p className="text-zinc-900 text-sm">{String(value)}</p>
                   </div>
                 ))}
               </div>
@@ -275,15 +275,15 @@ export default function LeadsPage() {
 
             {/* Metadata */}
             <div>
-              <h3 className="text-white font-semibold mb-3">מידע נוסף</h3>
+              <h3 className="text-zinc-900 font-semibold mb-3 text-sm">מידע נוסף</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-white/60">דף נחיתה:</span>
-                  <span className="text-white">{selectedLead.landingPage.name}</span>
+                  <span className="text-zinc-500">דף נחיתה:</span>
+                  <span className="text-zinc-900 font-medium">{selectedLead.landingPage.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-white/60">תאריך:</span>
-                  <span className="text-white">
+                  <span className="text-zinc-500">תאריך:</span>
+                  <span className="text-zinc-900 font-medium">
                     {new Date(selectedLead.createdAt).toLocaleString("he-IL")}
                   </span>
                 </div>
@@ -292,13 +292,13 @@ export default function LeadsPage() {
 
             {/* Status */}
             <div>
-              <h3 className="text-white font-semibold mb-3">סטטוס</h3>
+              <h3 className="text-zinc-900 font-semibold mb-3 text-sm">סטטוס</h3>
               <select
                 value={selectedLead.status}
                 onChange={(e) =>
                   handleStatusChange(selectedLead.id, e.target.value)
                 }
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
+                className="w-full px-4 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               >
                 <option value="new">חדש</option>
                 <option value="contacted">טופל</option>
@@ -308,7 +308,7 @@ export default function LeadsPage() {
 
             {/* Notes */}
             <div>
-              <h3 className="text-white font-semibold mb-3">הערות</h3>
+              <h3 className="text-zinc-900 font-semibold mb-3 text-sm">הערות</h3>
               <textarea
                 value={selectedLead.notes || ""}
                 onChange={async (e) => {
@@ -321,7 +321,7 @@ export default function LeadsPage() {
                     setSelectedLead({ ...selectedLead, notes: e.target.value });
                   }
                 }}
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white resize-none"
+                className="w-full px-4 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 resize-none focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
                 rows={4}
                 placeholder="הוסף הערות על הליד..."
                 dir="rtl"
@@ -329,11 +329,11 @@ export default function LeadsPage() {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-2 pt-4 border-t border-white/10">
+            <div className="flex gap-2 pt-4 border-t border-zinc-100">
               <Button
                 variant="secondary"
                 onClick={() => handleDelete(selectedLead.id)}
-                className="flex-1 text-red-400 hover:text-red-300"
+                className="flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"
               >
                 <FiTrash2 className="ml-2" />
                 מחק

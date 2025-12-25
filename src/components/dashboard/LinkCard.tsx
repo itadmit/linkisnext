@@ -45,32 +45,35 @@ export function LinkCard({ link, onEdit, onDelete, onToggle }: LinkCardProps) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-white border border-zinc-200 rounded-lg p-4 transition-all duration-200 ${
-        isDragging ? "opacity-50 scale-105 shadow-xl ring-2 ring-zinc-200" : "hover:border-zinc-300 hover:shadow-sm"
-      } ${!link.isActive ? "opacity-60 grayscale bg-zinc-50" : ""}`}
+      className={`bg-white border border-zinc-200 rounded-lg p-4 transition-all duration-200 shadow-sm ${
+        isDragging ? "opacity-50 scale-105 shadow-xl ring-2 ring-zinc-200" : "hover:border-zinc-300 hover:shadow-md"
+      } ${!link.isActive ? "opacity-60 bg-zinc-50/50 grayscale" : ""}`}
     >
       <div className="flex items-center gap-4">
         {/* Drag Handle */}
         <button
           {...attributes}
           {...listeners}
-          className="text-zinc-400 hover:text-zinc-600 cursor-grab active:cursor-grabbing p-1.5 hover:bg-zinc-100 rounded-md"
+          className="text-zinc-300 hover:text-zinc-600 cursor-grab active:cursor-grabbing p-1.5 hover:bg-zinc-50 rounded-md transition-colors"
         >
           <FiMenu size={18} />
         </button>
 
         {/* Icon */}
-        <div className="w-10 h-10 bg-zinc-100 rounded-lg flex items-center justify-center shrink-0 border border-zinc-200 text-zinc-600">
-          <IconRenderer iconValue={link.icon} size={20} />
+        <div className="w-12 h-12 bg-zinc-50 rounded-xl flex items-center justify-center shrink-0 border border-zinc-100 text-zinc-600">
+          <IconRenderer iconValue={link.icon} size={22} />
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0 text-right">
-          <h3 className="font-medium text-zinc-900 truncate text-sm">{link.title}</h3>
-          <p className="text-xs text-zinc-500 truncate mt-0.5">{link.url}</p>
+          <h3 className="font-semibold text-zinc-900 truncate text-base">{link.title}</h3>
+          <p className="text-sm text-zinc-500 truncate mt-0.5 flex items-center gap-1">
+            {link.url}
+            <FiExternalLink size={12} className="opacity-50" />
+          </p>
           {link.couponCode && (
-            <div className="flex items-center gap-2 mt-1.5 justify-end">
-              <span className="text-[10px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded border border-amber-200 font-medium">
+            <div className="flex items-center gap-2 mt-2 justify-end">
+              <span className="text-xs bg-amber-50/80 text-amber-700 px-2.5 py-1 rounded-md border border-amber-100 font-medium">
                 קופון: {link.couponCode}
               </span>
             </div>
@@ -78,37 +81,37 @@ export function LinkCard({ link, onEdit, onDelete, onToggle }: LinkCardProps) {
         </div>
 
         {/* Stats */}
-        <div className="text-center px-4 border-r border-zinc-100">
-          <p className="text-lg font-bold text-zinc-900">{link.clicks}</p>
-          <p className="text-[10px] text-zinc-500 uppercase tracking-wider">קליקים</p>
+        <div className="text-center px-6 border-r border-zinc-100 mx-2">
+          <p className="text-xl font-bold text-zinc-900 tracking-tight">{link.clicks}</p>
+          <p className="text-[10px] text-zinc-400 uppercase tracking-wider font-medium">קליקים</p>
         </div>
 
         {/* Actions */}
         <div className="flex items-center gap-1">
           <button
             onClick={() => onToggle(link.id, !link.isActive)}
-            className={`p-2 rounded-md transition-colors ${
+            className={`p-2 rounded-lg transition-colors ${
               link.isActive
                 ? "text-emerald-600 hover:bg-emerald-50"
                 : "text-zinc-400 hover:bg-zinc-100"
             }`}
             title={link.isActive ? "הסתר לינק" : "הצג לינק"}
           >
-            {link.isActive ? <FiEye size={16} /> : <FiEyeOff size={16} />}
+            {link.isActive ? <FiEye size={18} /> : <FiEyeOff size={18} />}
           </button>
           <button
             onClick={() => onEdit(link)}
-            className="p-2 rounded-md text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+            className="p-2 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
             title="ערוך"
           >
-            <FiEdit2 size={16} />
+            <FiEdit2 size={18} />
           </button>
           <button
             onClick={() => onDelete(link.id)}
-            className="p-2 rounded-md text-zinc-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+            className="p-2 rounded-lg text-zinc-400 hover:text-red-600 hover:bg-red-50 transition-colors"
             title="מחק"
           >
-            <FiTrash2 size={16} />
+            <FiTrash2 size={18} />
           </button>
         </div>
       </div>

@@ -55,9 +55,20 @@ export default function DashboardPage() {
     try {
       const res = await fetch("/api/links");
       const data = await res.json();
-      setLinks(data);
+      
+      // בדיקה שהתגובה היא מערך
+      if (Array.isArray(data)) {
+        setLinks(data);
+      } else {
+        // אם יש שגיאה או שהתגובה לא תקינה
+        setLinks([]);
+        if (data.error) {
+          toast.error(data.error);
+        }
+      }
     } catch (error) {
       toast.error("שגיאה בטעינת הלינקים");
+      setLinks([]);
     } finally {
       setIsLoading(false);
     }
@@ -200,17 +211,17 @@ export default function DashboardPage() {
           <div className="w-6 h-6 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : links.length === 0 ? (
-        <div className="text-center py-16 border border-dashed border-zinc-200 rounded-lg bg-zinc-50/50">
-          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 border border-zinc-200 shadow-sm">
+        <div className="text-center py-24 border border-dashed border-zinc-200 rounded-xl bg-white/50">
+          <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 border border-zinc-100 shadow-sm">
             <FiPlus size={24} className="text-zinc-400" />
           </div>
-          <h3 className="text-lg font-medium text-zinc-900 mb-1">
+          <h3 className="text-lg font-semibold text-zinc-900 mb-2">
             אין לך לינקים עדיין
           </h3>
-          <p className="text-zinc-500 text-sm mb-6">
-            התחל להוסיף לינקים לדף שלך
+          <p className="text-zinc-500 text-sm mb-8 max-w-xs mx-auto">
+            הוסף את הלינק הראשון שלך כדי להתחיל לבנות את העמוד שלך ולשתף אותו עם העולם
           </p>
-          <Button onClick={openNewModal}>
+          <Button onClick={openNewModal} size="lg">
             <FiPlus className="ml-2" />
             הוסף לינק ראשון
           </Button>

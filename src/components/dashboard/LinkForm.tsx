@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { IconPicker } from "@/components/dashboard/IconPicker";
-import { FiClock } from "react-icons/fi";
+import { FiClock, FiInfo } from "react-icons/fi";
 
 interface Link {
   id?: string;
@@ -189,8 +189,11 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
             />
           </div>
           {(formData.startsAt || formData.endsAt) && (
-            <div className="bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-3 text-sm text-indigo-300">
-              <p className="font-medium mb-1">ℹ️ מידע על תזמון:</p>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700">
+              <p className="font-medium mb-1 flex items-center gap-2">
+                <FiInfo size={16} />
+                מידע על תזמון:
+              </p>
               {formData.startsAt && (
                 <p>הלינק יופיע החל מ: {new Date(formData.startsAt).toLocaleString("he-IL")}</p>
               )}
