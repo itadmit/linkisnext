@@ -682,7 +682,7 @@ export default function EditLandingPagePage({
                       )}
                       </div>
                     ) : (
-                      <div className="max-w-4xl mx-auto p-8">
+                      <div className="max-w-4xl mx-auto px-8">
                         {section.type === "hero" && (
                           <div
                             className="text-center py-12 rounded-lg"
