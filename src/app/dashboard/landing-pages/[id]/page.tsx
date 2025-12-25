@@ -409,7 +409,7 @@ export default function EditLandingPagePage({
 
         {/* Center - Preview */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden bg-zinc-100 p-4">
-          <div className="min-h-full bg-white shadow-2xl border-2 border-dashed border-zinc-300 rounded-xl w-full overflow-hidden relative">
+          <div className="min-h-full bg-white shadow-2xl border border-zinc-200 rounded-xl w-full overflow-hidden relative">
             {sections.length === 0 ? (
               <div className="text-center py-20 px-8">
                 <p className="text-zinc-700 mb-2 font-medium">אין סקשנים עדיין</p>
@@ -422,7 +422,7 @@ export default function EditLandingPagePage({
                 {sections.map((section, index) => (
                   <div
                     key={section.id}
-                    className={`rounded-xl transition-all cursor-pointer group relative ${
+                    className={`rounded-xl transition-all cursor-pointer group relative border-2 border-dashed border-zinc-300 overflow-hidden ${
                       selectedSectionId === section.id
                         ? "ring-2 ring-zinc-900 ring-offset-2"
                         : "hover:ring-2 hover:ring-zinc-300 hover:ring-offset-2"
@@ -468,7 +468,7 @@ export default function EditLandingPagePage({
 
                     {/* Section Preview */}
                     {section.data.width === "full" ? (
-                      <div className="w-full" style={{ marginLeft: '-1rem', marginRight: '-1rem', width: 'calc(100% + 2rem)', maxWidth: 'calc(100% + 2rem)' }}>
+                      <div className="w-full" style={{ marginLeft: '-1rem', marginRight: '-1rem', width: 'calc(100% + 2rem)', maxWidth: 'calc(100% + 2rem)' }} className="-mx-4">
                         {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
