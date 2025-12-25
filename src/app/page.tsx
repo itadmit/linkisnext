@@ -262,28 +262,28 @@ export default function HomePage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
               בחר את החבילה המתאימה לך
             </h3>
-            <p className="text-white/70 text-lg">
+            <p className="text-zinc-600 text-lg">
               שתי אפשרויות פשוטות - בחר מה שמתאים לך
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Basic Plan */}
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300">
+            <div className="bg-white border-2 border-zinc-200 rounded-2xl p-8 hover:border-indigo-300 hover:shadow-xl transition-all duration-300">
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-bold text-white mb-2">חבילה בסיסית</h4>
-                <p className="text-white/60 text-sm mb-6">לינקים בלבד</p>
+                <h4 className="text-2xl font-bold text-zinc-900 mb-2">חבילה בסיסית</h4>
+                <p className="text-zinc-600 text-sm mb-6">לינקים בלבד</p>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">$10</span>
-                  <span className="text-white/60 mr-2">/ חודש</span>
+                  <span className="text-5xl font-bold text-zinc-900">$10</span>
+                  <span className="text-zinc-600 mr-2">/ חודש</span>
                 </div>
               </div>
-              <ul className="text-white/80 space-y-4 mb-8 text-right">
+              <ul className="text-zinc-700 space-y-4 mb-8 text-right">
                 {[
                   "לינקים ללא הגבלה",
                   "אנליטיקס בסיסי",
@@ -295,10 +295,10 @@ export default function HomePage() {
                 ].map((feature) => (
                   <li key={feature} className="flex items-center gap-2 justify-end">
                     <span className="text-sm">{feature}</span>
-                    <FiCheck className="text-green-400 shrink-0" size={18} />
+                    <FiCheck className="text-green-500 shrink-0" size={18} />
                   </li>
                 ))}
-                <li className="flex items-center gap-2 justify-end text-white/40">
+                <li className="flex items-center gap-2 justify-end text-zinc-400">
                   <span className="text-sm">דפי נחיתה</span>
                   <FiX className="text-red-400 shrink-0" size={18} />
                 </li>
@@ -311,19 +311,19 @@ export default function HomePage() {
             </div>
 
             {/* Premium Plan */}
-            <div className="bg-gradient-to-br from-indigo-600/30 to-purple-600/30 backdrop-blur-sm border-2 border-indigo-500/50 rounded-2xl p-8 hover:from-indigo-600/40 hover:to-purple-600/40 transition-all duration-300 relative">
-              <div className="absolute top-4 left-4 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-300 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 relative">
+              <div className="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                 מומלץ
               </div>
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-bold text-white mb-2">חבילה פרימיום</h4>
-                <p className="text-white/80 text-sm mb-6">כולל דפי נחיתה</p>
+                <h4 className="text-2xl font-bold text-zinc-900 mb-2">חבילה פרימיום</h4>
+                <p className="text-zinc-700 text-sm mb-6">כולל דפי נחיתה</p>
                 <div className="mb-6">
-                  <span className="text-5xl font-bold text-white">$20</span>
-                  <span className="text-white/70 mr-2">/ חודש</span>
+                  <span className="text-5xl font-bold text-zinc-900">$20</span>
+                  <span className="text-zinc-600 mr-2">/ חודש</span>
                 </div>
               </div>
-              <ul className="text-white/90 space-y-4 mb-8 text-right">
+              <ul className="text-zinc-800 space-y-4 mb-8 text-right">
                 {[
                   "כל התכונות של החבילה הבסיסית",
                   "דפי נחיתה ללא הגבלה",
@@ -334,7 +334,7 @@ export default function HomePage() {
                 ].map((feature) => (
                   <li key={feature} className="flex items-center gap-2 justify-end">
                     <span className="text-sm font-medium">{feature}</span>
-                    <FiCheck className="text-green-300 shrink-0" size={18} />
+                    <FiCheck className="text-green-600 shrink-0" size={18} />
                   </li>
                 ))}
               </ul>
@@ -345,9 +345,66 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <p className="text-white/50 text-sm text-center mt-8">
+          <p className="text-zinc-500 text-sm text-center mt-8">
             7 ימי ניסיון בחינם • ללא כרטיס אשראי לניסיון
           </p>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 px-4 bg-zinc-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-indigo-600 mb-2">10K+</div>
+              <p className="text-zinc-600">משתמשים פעילים</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-indigo-600 mb-2">50K+</div>
+              <p className="text-zinc-600">לינקים שנוצרו</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-indigo-600 mb-2">99.9%</div>
+              <p className="text-zinc-600">זמן פעילות</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
+              איך זה עובד?
+            </h3>
+            <p className="text-zinc-600 text-lg">
+              שלושה שלבים פשוטים להתחלה
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-indigo-600">1</span>
+              </div>
+              <h4 className="text-xl font-semibold text-zinc-900 mb-2">הירשם בחינם</h4>
+              <p className="text-zinc-600">צור חשבון תוך דקות ללא כרטיס אשראי</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-indigo-600">2</span>
+              </div>
+              <h4 className="text-xl font-semibold text-zinc-900 mb-2">הוסף לינקים</h4>
+              <p className="text-zinc-600">הוסף את כל הלינקים שלך והתאם את העיצוב</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-indigo-600">3</span>
+              </div>
+              <h4 className="text-xl font-semibold text-zinc-900 mb-2">שתף עם העולם</h4>
+              <p className="text-zinc-600">שתף את הדף שלך ועקוב אחר הביצועים</p>
+            </div>
+          </div>
         </div>
       </section>
 
