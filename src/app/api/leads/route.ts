@@ -1,0 +1,91 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+
+// Get all leads for the current user
+export async function GET() {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "לא מורשה" }, { status: 401 });
+    }
+
+    // Get all landing pages for this user
+    const landingPages = await prisma.landingPage.findMany({
+      where: { userId: session.user.id },
+      select: { id: true },
+    });
+
+    const landingPageIds = landingPages.map((page) => page.id);
+
+    const leads = await prisma.lead.findMany({
+      where: {
+        landingPageId: { in: landingPageIds },
+      },
+      include: {
+        landingPage: {
+          select: {
+            name: true,
+            slug: true,
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return NextResponse.json(leads);
+  } catch (error) {
+    console.error("Get leads error:", error);
+    return NextResponse.json({ error: "שגיאה בטעינת הלידים" }, { status: 500 });
+  }
+}
+
+// Create a new lead
+export async function POST(req: NextRequest) {
+  try {
+    const { landingPageId, formData } = await req.json();
+
+    if (!landingPageId || !formData) {
+      return NextResponse.json(
+        { error: "נדרשים landingPageId ו-formData" },
+        { status: 400 }
+      );
+    }
+
+    // Verify landing page exists and is published
+    const landingPage = await prisma.landingPage.findUnique({
+      where: { id: landingPageId },
+    });
+
+    if (!landingPage || landingPage.status !== "published") {
+      return NextResponse.json(
+        { error: "דף נחיתה לא נמצא או לא פורסם" },
+        { status: 404 }
+      );
+    }
+
+    // Get IP address and user agent from headers
+    const ipAddress = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
+    const userAgent = req.headers.get("user-agent") || "unknown";
+    const referrer = req.headers.get("referer") || null;
+
+    // Create lead
+    const lead = await prisma.lead.create({
+      data: {
+        landingPageId,
+        formData: JSON.stringify(formData),
+        ipAddress,
+        userAgent,
+        referrer,
+        status: "new",
+      },
+    });
+
+    return NextResponse.json(lead);
+  } catch (error) {
+    console.error("Create lead error:", error);
+    return NextResponse.json({ error: "שגיאה בשמירת הליד" }, { status: 500 });
+  }
+}

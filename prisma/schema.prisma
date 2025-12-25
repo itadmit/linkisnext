@@ -1,0 +1,193 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  slug          String    @unique
+  bio           String?
+  avatar        String?
+  theme         String    @default("default")
+  backgroundColor String  @default("#1a1a2e")
+  textColor     String    @default("#ffffff")
+  buttonColor   String    @default("#6366f1")
+  buttonTextColor String  @default("#ffffff")
+  buttonStyle   String    @default("rounded") // rounded, pill, square, outline
+  backgroundStyle String  @default("gradient") // gradient, particles, waves, geometric, none
+  fontFamily    String    @default("rubik") // rubik, heebo, assistant, open-sans
+  
+  // Social Links (stored as JSON)
+  socialLinks   String?   // JSON string of social links
+  
+  // SEO
+  seoTitle      String?
+  seoDescription String?
+  
+  // Subscription
+  subscriptionStatus String   @default("trial") // trial, active, cancelled, expired
+  subscriptionPlan   String   @default("basic") // basic, premium
+  trialEndsAt       DateTime?
+  subscriptionId    String?   // PayPal subscription ID
+  subscriptionEndsAt DateTime?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  links         Link[]
+  analytics     Analytics[]
+  landingPages  LandingPage[]
+}
+
+model Link {
+  id          String   @id @default(cuid())
+  title       String
+  url         String
+  icon        String?  // emoji or icon name
+  couponCode  String?  // if it's a coupon link
+  discountDescription String?  // description of the discount (e.g., "20% הנחה", "50 ש\"ח הנחה")
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  
+  // Scheduling
+  startsAt    DateTime?
+  endsAt      DateTime?
+  
+  clicks      Int      @default(0)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  analytics   Analytics[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([userId])
+}
+
+model Analytics {
+  id        String   @id @default(cuid())
+  type      String   // "click", "pageview"
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  linkId    String?
+  link      Link?    @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  
+  country   String?
+  city      String?
+  device    String?
+  browser   String?
+  referer   String?
+  
+  createdAt DateTime @default(now())
+  
+  @@index([userId])
+  @@index([linkId])
+  @@index([createdAt])
+}
+
+model LandingPage {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Basic Info
+  name            String   // שם הדף
+  slug            String   // URL slug (unique per user)
+  description     String?  // תיאור פנימי
+  status          String   @default("draft") // draft, published
+  
+  // Design
+  backgroundColor String   @default("#ffffff")
+  textColor       String   @default("#000000")
+  buttonColor     String   @default("#6366f1")
+  buttonTextColor String   @default("#ffffff")
+  fontFamily      String   @default("rubik")
+  
+  // Sections (stored as JSON)
+  sections        String   // JSON array of sections
+  
+  // SEO
+  seoTitle        String?
+  seoDescription  String?
+  seoImage        String?
+  
+  // Analytics
+  views           Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  leads           Lead[]
+  analytics       LandingPageAnalytics[]
+  
+  @@unique([userId, slug])
+  @@index([userId])
+  @@index([status])
+}
+
+model Lead {
+  id              String   @id @default(cuid())
+  landingPageId   String
+  landingPage     LandingPage @relation(fields: [landingPageId], references: [id], onDelete: Cascade)
+  
+  // Form Data (stored as JSON)
+  formData        String   // JSON object with all form fields
+  
+  // Metadata
+  ipAddress       String?
+  userAgent       String?
+  referrer        String?
+  
+  // Status
+  status          String   @default("new") // new, contacted, archived
+  
+  // Notes
+  notes           String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([landingPageId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model LandingPageAnalytics {
+  id              String   @id @default(cuid())
+  landingPageId   String
+  landingPage     LandingPage @relation(fields: [landingPageId], references: [id], onDelete: Cascade)
+  
+  type            String   // "pageview", "scroll", "click"
+  
+  // Tracking Data
+  ipAddress       String?
+  userAgent       String?
+  referrer        String?
+  country         String?
+  city            String?
+  device          String?
+  browser         String?
+  
+  // Event Data (stored as JSON)
+  eventData       String?   // Additional event data
+  
+  createdAt       DateTime @default(now())
+  
+  @@index([landingPageId])
+  @@index([type])
+  @@index([createdAt])
+}
