@@ -121,13 +121,28 @@ export default function HomePage() {
           >
             <Link href="/register">
               <Button size="lg">
-                {t("hero.cta")}
+                {isRTL ? (
+                  <>
+                    {t("hero.cta").replace("→", "")} ←
+                  </>
+                ) : (
+                  <>
+                    → {t("hero.cta").replace("→", "")}
+                  </>
+                )}
               </Button>
             </Link>
             <a href="#features">
               <Button variant="secondary" size="lg" className="bg-white text-zinc-900 border-zinc-300">
-                <FiArrowDown className={`${isRTL ? "mr-2" : "ml-2"} animate-bounce`} />
-                {t("hero.learnMore")}
+                {isRTL ? (
+                  <>
+                    {t("hero.learnMore")} <FiArrowDown className="mr-2 animate-bounce" />
+                  </>
+                ) : (
+                  <>
+                    <FiArrowDown className="ml-2 animate-bounce" /> {t("hero.learnMore")}
+                  </>
+                )}
               </Button>
             </a>
           </div>
