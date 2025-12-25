@@ -408,10 +408,10 @@ export default function EditLandingPagePage({
         </div>
 
         {/* Center - Preview */}
-        <div className="flex-1 overflow-y-auto bg-zinc-100">
-          <div className="min-h-full bg-white shadow-2xl border border-zinc-200 w-full">
+        <div className="flex-1 overflow-y-auto bg-zinc-100 p-4">
+          <div className="min-h-full bg-white shadow-2xl border border-zinc-200 rounded-xl w-full">
             {sections.length === 0 ? (
-              <div className="text-center py-20">
+              <div className="text-center py-20 px-8">
                 <p className="text-zinc-700 mb-2 font-medium">אין סקשנים עדיין</p>
                 <p className="text-zinc-500 text-sm">
                   לחץ על סקשן מהסיידבר כדי להוסיף
@@ -467,9 +467,9 @@ export default function EditLandingPagePage({
                     </div>
 
                     {/* Section Preview */}
-                    <div className={section.data.width === "full" ? "w-full" : ""}>
-                      <div className={section.data.width === "container" || !section.data.width ? "max-w-4xl mx-auto p-8" : ""}>
-                      {section.type === "hero" && (
+                    {section.data.width === "full" ? (
+                      <div className="w-full -mx-4">
+                        {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
                           style={{
@@ -681,7 +681,221 @@ export default function EditLandingPagePage({
                         </div>
                       )}
                       </div>
-                    </div>
+                    ) : (
+                      <div className="max-w-4xl mx-auto p-8">
+                        {section.type === "hero" && (
+                          <div
+                            className="text-center py-12 rounded-lg"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#6366f1",
+                              color: section.style?.textColor || "#ffffff",
+                            }}
+                          >
+                            <h2
+                              className={`font-bold mb-4 ${
+                                section.data.titleSize === "2xl" ? "text-2xl" :
+                                section.data.titleSize === "3xl" ? "text-3xl" :
+                                section.data.titleSize === "5xl" ? "text-5xl" :
+                                "text-4xl"
+                              }`}
+                              style={{ color: section.style?.textColor || "#ffffff" }}
+                            >
+                              {section.data.title || "כותרת"}
+                            </h2>
+                            <p className="text-xl mb-6" style={{ color: section.style?.textColor || "#ffffff" }}>
+                              {section.data.subtitle || "תת-כותרת"}
+                            </p>
+                            <button
+                              className="px-6 py-3 rounded-lg font-semibold"
+                              style={{
+                                backgroundColor: section.data.buttonColor || "#ffffff",
+                                color: section.data.buttonTextColor || "#6366f1",
+                              }}
+                            >
+                              {section.data.ctaText || "כפתור"}
+                            </button>
+                          </div>
+                        )}
+                        {section.type === "features" && (
+                          <div
+                            className="rounded-lg p-6"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#f9fafb",
+                            }}
+                          >
+                            <h3
+                              className="text-2xl font-bold mb-6 text-center"
+                              style={{ color: section.style?.textColor || "#000000" }}
+                            >
+                              {section.data.title || "תכונות"}
+                            </h3>
+                            <div className={`grid gap-4 ${
+                              section.data.columns === 2 ? "grid-cols-2" :
+                              section.data.columns === 4 ? "grid-cols-4" :
+                              "grid-cols-3"
+                            }`}>
+                              {section.data.items?.map((item: any, i: number) => (
+                                <div key={i} className="text-center">
+                                  {item.icon && (
+                                    <div className="mb-2 flex justify-center">
+                                      <IconRenderer iconValue={item.icon} size={32} />
+                                    </div>
+                                  )}
+                                  <h4 className="font-semibold" style={{ color: section.style?.textColor || "#000000" }}>
+                                    {item.title}
+                                  </h4>
+                                  <p className="text-sm" style={{ color: section.style?.textColor || "#666666", opacity: 0.8 }}>
+                                    {item.description}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {section.type === "testimonials" && (
+                          <div
+                            className="rounded-lg p-6"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#f9fafb",
+                            }}
+                          >
+                            <h3
+                              className="text-2xl font-bold mb-6 text-center"
+                              style={{ color: section.style?.textColor || "#000000" }}
+                            >
+                              {section.data.title || "המלצות"}
+                            </h3>
+                            <div className="grid grid-cols-2 gap-4">
+                              {section.data.items?.map((item: any, i: number) => (
+                                <div key={i} className="bg-white rounded-lg p-4 border border-gray-200">
+                                  <p className="mb-3" style={{ color: section.style?.textColor || "#374151" }}>
+                                    "{item.text || "המלצה"}"
+                                  </p>
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center text-white">
+                                      {(item.name || "א")[0]}
+                                    </div>
+                                    <div>
+                                      <p className="font-semibold" style={{ color: section.style?.textColor || "#000000" }}>
+                                        {item.name || "שם"}
+                                      </p>
+                                      <p className="text-sm" style={{ color: section.style?.textColor || "#666666", opacity: 0.8 }}>
+                                        {item.role || "תפקיד"}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {section.type === "about" && (
+                          <div
+                            className="flex items-center gap-6 rounded-lg p-6"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#ffffff",
+                            }}
+                          >
+                            {section.data.imagePosition === "left" && section.data.image && (
+                              <img src={section.data.image} alt="" className="w-48 h-48 rounded-lg object-cover" />
+                            )}
+                            <div className="flex-1">
+                              <h3
+                                className="text-2xl font-bold mb-4"
+                                style={{ color: section.style?.textColor || "#000000" }}
+                              >
+                                {section.data.title || "אודותינו"}
+                              </h3>
+                              <p
+                                className="whitespace-pre-line"
+                                style={{ color: section.style?.textColor || "#374151" }}
+                              >
+                                {section.data.content || "תוכן..."}
+                              </p>
+                            </div>
+                            {section.data.imagePosition === "right" && section.data.image && (
+                              <img src={section.data.image} alt="" className="w-48 h-48 rounded-lg object-cover" />
+                            )}
+                          </div>
+                        )}
+                        {section.type === "cta" && (
+                          <div
+                            className="text-center py-12 rounded-lg"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#6366f1",
+                              color: section.style?.textColor || "#ffffff",
+                            }}
+                          >
+                            <h3 className="text-3xl font-bold mb-4" style={{ color: section.style?.textColor || "#ffffff" }}>
+                              {section.data.title || "מוכן להתחיל?"}
+                            </h3>
+                            <p className="text-xl mb-6 opacity-90" style={{ color: section.style?.textColor || "#ffffff" }}>
+                              {section.data.description || "תיאור"}
+                            </p>
+                            <button
+                              className="px-8 py-4 rounded-lg font-semibold text-lg"
+                              style={{
+                                backgroundColor: section.data.buttonColor || "#ffffff",
+                                color: section.data.buttonTextColor || "#6366f1",
+                              }}
+                            >
+                              {section.data.ctaText || "כפתור"}
+                            </button>
+                          </div>
+                        )}
+                        {section.type === "faq" && (
+                          <div
+                            className="rounded-lg p-6"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#f9fafb",
+                            }}
+                          >
+                            <h3
+                              className="text-2xl font-bold mb-6 text-center"
+                              style={{ color: section.style?.textColor || "#000000" }}
+                            >
+                              {section.data.title || "שאלות נפוצות"}
+                            </h3>
+                            <div className="space-y-3">
+                              {section.data.items?.map((item: any, i: number) => (
+                                <div key={i} className="bg-white border border-gray-200 rounded-lg p-4">
+                                  <h4 className="font-semibold mb-2" style={{ color: section.style?.textColor || "#000000" }}>
+                                    {item.question || "שאלה?"}
+                                  </h4>
+                                  <p className="text-sm" style={{ color: section.style?.textColor || "#666666", opacity: 0.8 }}>
+                                    {item.answer || "תשובה..."}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {section.type === "contact-form" && (
+                          <div
+                            className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center"
+                            style={{
+                              backgroundColor: section.style?.backgroundColor || "#ffffff",
+                            }}
+                          >
+                            <h3
+                              className="text-2xl font-bold mb-2"
+                              style={{ color: section.style?.textColor || "#000000" }}
+                            >
+                              {section.data.title || "טופס יצירת קשר"}
+                            </h3>
+                            <p
+                              className="mb-4"
+                              style={{ color: section.style?.textColor || "#666666", opacity: 0.8 }}
+                            >
+                              {section.data.description || "תיאור"}
+                            </p>
+                            <div className="bg-gray-100 rounded-lg p-4">
+                              <p className="text-gray-500 text-sm">טופס יופיע כאן</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
