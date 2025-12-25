@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { FiLink, FiBarChart2, FiClock, FiSmartphone, FiZap, FiShield, FiArrowDown, FiCheck, FiStar, FiSend, FiCamera, FiTwitter, FiYoutube, FiGlobe, FiGift, FiUser } from "react-icons/fi";
+import { FiLink, FiBarChart2, FiClock, FiSmartphone, FiZap, FiShield, FiArrowDown, FiCheck, FiStar, FiSend, FiCamera, FiTwitter, FiYoutube, FiGlobe, FiGift, FiUser, FiX } from "react-icons/fi";
 
 const features = [
   {
