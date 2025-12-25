@@ -3,9 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { FiSave, FiEye, FiArrowRight, FiTarget, FiZap, FiMessageCircle, FiBook, FiSend, FiMail, FiHelpCircle, FiArrowLeft, FiChevronUp, FiChevronDown, FiTrash2, FiEdit } from "react-icons/fi";
+import { FiSave, FiEye, FiArrowRight, FiTarget, FiZap, FiMessageCircle, FiBook, FiSend, FiMail, FiHelpCircle, FiArrowLeft, FiChevronUp, FiChevronDown, FiTrash2, FiEdit, FiPlus } from "react-icons/fi";
 import { IconRenderer } from "@/lib/icons";
 import { SectionSettings } from "@/components/landing/SectionSettings";
+import { Modal } from "@/components/ui/Modal";
 import toast from "react-hot-toast";
 
 interface Section {
@@ -41,6 +42,7 @@ export default function EditLandingPagePage({
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
+  const [showAddSectionModal, setShowAddSectionModal] = useState(false);
 
   useEffect(() => {
     params.then((p) => setPageId(p.id));
@@ -158,6 +160,7 @@ export default function EditLandingPagePage({
     };
     setSections([...sections, newSection]);
     setSelectedSectionId(newSection.id);
+    setShowAddSectionModal(false);
   };
 
   const getDefaultSectionData = (type: string): any => {
@@ -334,33 +337,6 @@ export default function EditLandingPagePage({
 
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden w-full">
-        {/* Left Sidebar - Available Sections */}
-        <div className="w-64 bg-white border-l border-zinc-200 p-4 overflow-y-auto shadow-sm shrink-0">
-          <h3 className="text-zinc-900 font-semibold mb-4 text-sm">הוסף סקשן</h3>
-          <div className="space-y-2">
-            {[
-              { type: "hero", label: "Hero", icon: FiTarget },
-              { type: "features", label: "תכונות", icon: FiZap },
-              { type: "testimonials", label: "המלצות", icon: FiMessageCircle },
-              { type: "about", label: "אודות", icon: FiBook },
-              { type: "cta", label: "CTA", icon: FiSend },
-              { type: "contact-form", label: "טופס יצירת קשר", icon: FiMail },
-              { type: "faq", label: "שאלות נפוצות", icon: FiHelpCircle },
-            ].map((section) => {
-              const IconComponent = section.icon;
-              return (
-                <button
-                  key={section.type}
-                  onClick={() => addSection(section.type)}
-                  className="w-full p-3 bg-white hover:bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-900 text-right transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md"
-                >
-                  <IconComponent size={18} className="text-zinc-600" />
-                  <span className="text-sm font-medium">{section.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
 
         {/* Center - Preview */}
         <div className="flex-1 overflow-y-auto bg-zinc-100 p-8">
@@ -642,17 +618,121 @@ export default function EditLandingPagePage({
           </div>
         </div>
 
-        {/* Right Sidebar - Section Settings */}
-        {selectedSection && (
-          <div className="w-80 bg-white border-r border-zinc-200 p-4 overflow-y-auto shadow-sm shrink-0">
-            <h3 className="text-zinc-900 font-semibold mb-4 text-sm">הגדרות סקשן</h3>
-            <SectionSettings
-              section={selectedSection}
-              onUpdate={(updates) => updateSection(selectedSection.id, updates)}
-            />
+        {/* Right Sidebar - Sections List & Settings */}
+        <div className="w-80 bg-white border-r border-zinc-200 overflow-hidden flex flex-col shrink-0">
+          {/* Sections List */}
+          <div className="p-4 border-b border-zinc-200 overflow-y-auto flex-1">
+            <h3 className="text-zinc-900 font-semibold mb-4 text-sm">סקשנים</h3>
+            {sections.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-zinc-500 text-sm mb-4">אין סקשנים עדיין</p>
+                <button
+                  onClick={() => setShowAddSectionModal(true)}
+                  className="w-full p-3 bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <FiPlus size={18} />
+                  <span className="text-sm font-medium">הוסף סקשן ראשון</span>
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  {sections.map((section, index) => {
+                    const sectionIcons: Record<string, any> = {
+                      hero: FiTarget,
+                      features: FiZap,
+                      testimonials: FiMessageCircle,
+                      about: FiBook,
+                      cta: FiSend,
+                      "contact-form": FiMail,
+                      faq: FiHelpCircle,
+                    };
+                    const IconComponent = sectionIcons[section.type] || FiTarget;
+                    const sectionLabels: Record<string, string> = {
+                      hero: "Hero",
+                      features: "תכונות",
+                      testimonials: "המלצות",
+                      about: "אודות",
+                      cta: "CTA",
+                      "contact-form": "טופס יצירת קשר",
+                      faq: "שאלות נפוצות",
+                    };
+                    
+                    return (
+                      <button
+                        key={section.id}
+                        onClick={() => setSelectedSectionId(section.id)}
+                        className={`w-full p-3 rounded-lg text-right transition-all duration-200 flex items-center gap-2 ${
+                          selectedSectionId === section.id
+                            ? "bg-zinc-900 text-white shadow-md"
+                            : "bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-900"
+                        }`}
+                      >
+                        <IconComponent size={18} />
+                        <span className="text-sm font-medium flex-1">{sectionLabels[section.type] || section.type}</span>
+                        <span className="text-xs opacity-60">#{index + 1}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                
+                {/* Add Section Button */}
+                <div className="mt-4 pt-4 border-t border-zinc-200">
+                <button
+                  onClick={() => setShowAddSectionModal(true)}
+                  className="w-full p-3 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-lg text-zinc-900 transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <FiPlus size={18} />
+                  <span className="text-sm font-medium">הוסף סקשן</span>
+                </button>
+                </div>
+              </>
+            )}
           </div>
-        )}
+
+          {/* Section Settings */}
+          {selectedSection && (
+            <div className="p-4 border-t border-zinc-200 overflow-y-auto flex-1 max-h-[50vh]">
+              <h3 className="text-zinc-900 font-semibold mb-4 text-sm">הגדרות סקשן</h3>
+              <SectionSettings
+                section={selectedSection}
+                onUpdate={(updates) => updateSection(selectedSection.id, updates)}
+              />
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Add Section Modal */}
+      <Modal
+        isOpen={showAddSectionModal}
+        onClose={() => setShowAddSectionModal(false)}
+        title="בחר סוג סקשן"
+      >
+        <div className="space-y-2">
+          {[
+            { type: "hero", label: "Hero", icon: FiTarget },
+            { type: "features", label: "תכונות", icon: FiZap },
+            { type: "testimonials", label: "המלצות", icon: FiMessageCircle },
+            { type: "about", label: "אודות", icon: FiBook },
+            { type: "cta", label: "CTA", icon: FiSend },
+            { type: "contact-form", label: "טופס יצירת קשר", icon: FiMail },
+            { type: "faq", label: "שאלות נפוצות", icon: FiHelpCircle },
+          ].map((section) => {
+            const IconComponent = section.icon;
+            return (
+              <button
+                key={section.type}
+                onClick={() => addSection(section.type)}
+                className="w-full p-4 bg-white hover:bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-900 text-right transition-all duration-200 flex items-center gap-3 hover:shadow-md"
+              >
+                <IconComponent size={20} className="text-zinc-600" />
+                <span className="text-sm font-medium">{section.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </Modal>
     </div>
   );
 }
