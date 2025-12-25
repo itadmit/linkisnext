@@ -69,12 +69,12 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold text-zinc-900">
               LinkHub
           </h1>
             <div className="flex items-center gap-4">
@@ -85,7 +85,7 @@ export default function HomePage() {
               ) : (
                 <>
                   <Link href="/login">
-                    <Button variant="ghost">התחברות</Button>
+                    <Button variant="ghost" className="text-zinc-700 hover:text-zinc-900">התחברות</Button>
                   </Link>
                   <Link href="/register">
                     <Button>התחל בחינם</Button>
@@ -99,37 +99,30 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-4 relative">
-        {/* Background decorations */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
-        </div>
-
         <div className="max-w-4xl mx-auto text-center relative">
           <div
-            className={`inline-block mb-4 px-4 py-2 bg-indigo-500/20 rounded-full border border-indigo-500/30 ${
+            className={`inline-block mb-6 px-4 py-2 bg-indigo-50 rounded-full border border-indigo-200 ${
               mounted ? "animate-bounce-in" : "opacity-0"
             }`}
           >
-            <span className="text-indigo-400 text-sm font-medium flex items-center gap-2">
+            <span className="text-indigo-600 text-sm font-medium flex items-center gap-2">
               <FiStar size={16} />
               7 ימי ניסיון בחינם
             </span>
           </div>
           <h2
-            className={`text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight ${
+            className={`text-5xl sm:text-6xl lg:text-7xl font-bold text-zinc-900 mb-6 leading-tight ${
               mounted ? "animate-slide-up" : "opacity-0"
             }`}
           >
             כל הלינקים שלך
             <br />
-            <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient bg-[length:200%_200%]">
+            <span className="text-indigo-600">
               במקום אחד
             </span>
           </h2>
           <p
-            className={`text-xl text-white/70 mb-8 max-w-2xl mx-auto ${
+            className={`text-xl text-zinc-600 mb-8 max-w-2xl mx-auto ${
               mounted ? "animate-slide-up stagger-2" : "opacity-0"
             }`}
           >
@@ -141,12 +134,12 @@ export default function HomePage() {
             }`}
           >
             <Link href="/register">
-              <Button size="lg" className="animate-pulse-glow">
+              <Button size="lg">
                 התחל בחינם →
               </Button>
             </Link>
             <a href="#features">
-              <Button variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" className="bg-white text-zinc-900 border-zinc-300">
                 <FiArrowDown className="ml-2 animate-bounce" />
                 גלה עוד
               </Button>
@@ -160,20 +153,20 @@ export default function HomePage() {
             mounted ? "animate-float" : ""
           }`}
         >
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-white/10 shadow-2xl">
+          <div className="bg-white rounded-2xl p-8 border border-zinc-200 shadow-xl">
             <div className="text-center mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <div className="w-20 h-20 bg-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
                 <FiSend className="text-white" size={32} />
               </div>
-              <h3 className="text-xl font-bold text-white">השם שלך</h3>
-              <p className="text-white/60 text-sm">מפתח | יוצר תוכן</p>
+              <h3 className="text-xl font-bold text-zinc-900">השם שלך</h3>
+              <p className="text-zinc-600 text-sm">מפתח | יוצר תוכן</p>
               <div className="flex justify-center gap-2 mt-3">
                 {[FiCamera, FiTwitter, FiYoutube].map((Icon, i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center"
+                    className="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center hover:bg-zinc-200 transition-colors"
                   >
-                    <Icon className="text-white" size={16} />
+                    <Icon className="text-zinc-600" size={16} />
                   </div>
                 ))}
               </div>
@@ -186,14 +179,14 @@ export default function HomePage() {
               ].map((item, i) => (
                 <div
                   key={item.text}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white text-center py-3 rounded-xl transition-all duration-200 cursor-pointer hover:scale-[1.02] flex items-center justify-center gap-2"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white text-center py-3 rounded-lg transition-all duration-200 cursor-pointer hover:scale-[1.02] flex items-center justify-center gap-2 shadow-sm"
                   style={{ animationDelay: `${i * 0.1}s` }}
                 >
                   <item.icon size={18} />
                   {item.text}
                 </div>
               ))}
-              <div className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-center py-3 rounded-xl transition-all duration-200 cursor-pointer hover:scale-[1.02] flex items-center justify-center gap-2">
+              <div className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-center py-3 rounded-lg transition-all duration-200 cursor-pointer hover:scale-[1.02] flex items-center justify-center gap-2 shadow-sm">
                 <FiGift size={18} />
                 קופון: SAVE20
               </div>
@@ -203,13 +196,13 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="py-20 px-4">
+      <section id="features" className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
               כל מה שאתה צריך
             </h3>
-            <p className="text-white/70 text-lg">
+            <p className="text-zinc-600 text-lg">
               תכונות מתקדמות שיעזרו לך להצליח
             </p>
           </div>
@@ -217,15 +210,15 @@ export default function HomePage() {
             {features.map((feature, i) => (
               <div
                 key={feature.title}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group hover:-translate-y-1"
+                className="bg-white border border-zinc-200 rounded-xl p-6 hover:border-indigo-300 hover:shadow-lg transition-all duration-300 group"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-indigo-500/20">
-                  <feature.icon className="text-white" size={24} />
+                <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition-colors duration-300">
+                  <feature.icon className="text-indigo-600 group-hover:text-white transition-colors" size={24} />
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
+                <h4 className="text-lg font-semibold text-zinc-900 mb-2">
                   {feature.title}
                 </h4>
-                <p className="text-white/60">{feature.description}</p>
+                <p className="text-zinc-600">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -233,13 +226,13 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-zinc-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
               מה אומרים עלינו
             </h3>
-            <p className="text-white/70 text-lg">
+            <p className="text-zinc-600 text-lg">
               אלפי משתמשים כבר משתמשים ב-LinkHub
             </p>
           </div>
@@ -247,21 +240,21 @@ export default function HomePage() {
             {testimonials.map((testimonial, i) => (
               <div
                 key={testimonial.name}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+                className="bg-white border border-zinc-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
                     {(() => {
                       const AvatarIcon = testimonial.avatar;
                       return <AvatarIcon className="text-white" size={24} />;
                     })()}
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-medium">{testimonial.name}</p>
-                    <p className="text-white/60 text-sm">{testimonial.role}</p>
+                    <p className="text-zinc-900 font-medium">{testimonial.name}</p>
+                    <p className="text-zinc-600 text-sm">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-white/80">&quot;{testimonial.text}&quot;</p>
+                <p className="text-zinc-700">&quot;{testimonial.text}&quot;</p>
               </div>
             ))}
           </div>
@@ -269,70 +262,106 @@ export default function HomePage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 px-4">
-        <div className="max-w-md mx-auto">
-          <div className="text-center mb-12">
+      <section className="py-20 px-4 bg-white/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
             <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              תמחור פשוט
+              בחר את החבילה המתאימה לך
             </h3>
-            <p className="text-white/70">
-              תכנית אחת עם כל התכונות
+            <p className="text-white/70 text-lg">
+              שתי אפשרויות פשוטות - בחר מה שמתאים לך
             </p>
           </div>
-          <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 backdrop-blur-sm border border-indigo-500/30 rounded-3xl p-8 text-center relative overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-2xl" />
-            <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500/20 rounded-full blur-2xl" />
-            
-            <div className="relative">
-              <div className="inline-block px-4 py-1 bg-indigo-500/30 rounded-full text-indigo-300 text-sm font-medium mb-4">
-                הכי פופולרי
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Basic Plan */}
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300">
+              <div className="text-center mb-8">
+                <h4 className="text-2xl font-bold text-white mb-2">חבילה בסיסית</h4>
+                <p className="text-white/60 text-sm mb-6">לינקים בלבד</p>
+                <div className="mb-6">
+                  <span className="text-5xl font-bold text-white">$10</span>
+                  <span className="text-white/60 mr-2">/ חודש</span>
+                </div>
               </div>
-              <div className="mb-6">
-                <span className="text-5xl font-bold text-white">$10</span>
-                <span className="text-white/60 mr-2">/ חודש</span>
-              </div>
-              <ul className="text-white/80 space-y-3 mb-8 text-right">
+              <ul className="text-white/80 space-y-4 mb-8 text-right">
                 {[
                   "לינקים ללא הגבלה",
-                  "אנליטיקס מתקדם",
+                  "אנליטיקס בסיסי",
                   "עיצוב מותאם אישית",
                   "קופונים חכמים",
                   "QR Code",
                   "תזמון לינקים",
                   "רשתות חברתיות",
-                  "תמיכה בעברית",
                 ].map((feature) => (
                   <li key={feature} className="flex items-center gap-2 justify-end">
-                    <span>{feature}</span>
-                    <FiCheck className="text-green-400" />
+                    <span className="text-sm">{feature}</span>
+                    <FiCheck className="text-green-400 shrink-0" size={18} />
+                  </li>
+                ))}
+                <li className="flex items-center gap-2 justify-end text-white/40">
+                  <span className="text-sm">דפי נחיתה</span>
+                  <FiX className="text-red-400 shrink-0" size={18} />
+                </li>
+              </ul>
+              <Link href="/register">
+                <Button size="lg" className="w-full" variant="secondary">
+                  התחל בחינם
+                </Button>
+              </Link>
+            </div>
+
+            {/* Premium Plan */}
+            <div className="bg-gradient-to-br from-indigo-600/30 to-purple-600/30 backdrop-blur-sm border-2 border-indigo-500/50 rounded-2xl p-8 hover:from-indigo-600/40 hover:to-purple-600/40 transition-all duration-300 relative">
+              <div className="absolute top-4 left-4 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                מומלץ
+              </div>
+              <div className="text-center mb-8">
+                <h4 className="text-2xl font-bold text-white mb-2">חבילה פרימיום</h4>
+                <p className="text-white/80 text-sm mb-6">כולל דפי נחיתה</p>
+                <div className="mb-6">
+                  <span className="text-5xl font-bold text-white">$20</span>
+                  <span className="text-white/70 mr-2">/ חודש</span>
+                </div>
+              </div>
+              <ul className="text-white/90 space-y-4 mb-8 text-right">
+                {[
+                  "כל התכונות של החבילה הבסיסית",
+                  "דפי נחיתה ללא הגבלה",
+                  "בילדר דפי נחיתה",
+                  "ניהול לידים",
+                  "אנליטיקס מתקדם",
+                  "תמיכה עדיפות",
+                ].map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 justify-end">
+                    <span className="text-sm font-medium">{feature}</span>
+                    <FiCheck className="text-green-300 shrink-0" size={18} />
                   </li>
                 ))}
               </ul>
               <Link href="/register">
                 <Button size="lg" className="w-full">
-                  התחל 7 ימים בחינם
+                  התחל בחינם
                 </Button>
               </Link>
-              <p className="text-white/50 text-sm mt-4">
-                ללא כרטיס אשראי לניסיון
-              </p>
             </div>
           </div>
+          <p className="text-white/50 text-sm text-center mt-8">
+            7 ימי ניסיון בחינם • ללא כרטיס אשראי לניסיון
+          </p>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
             מוכן להתחיל?
           </h3>
-          <p className="text-white/70 text-lg mb-8">
+          <p className="text-zinc-600 text-lg mb-8">
             הצטרף לאלפי משתמשים שכבר משתמשים ב-LinkHub
           </p>
           <Link href="/register">
-            <Button size="lg" className="animate-pulse-glow">
+            <Button size="lg">
               צור את הדף שלך עכשיו →
             </Button>
           </Link>
@@ -340,17 +369,17 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/10">
+      <footer className="py-8 border-t border-zinc-200 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/50">
+            <p className="text-zinc-600">
               © 2024 LinkHub. כל הזכויות שמורות.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/login" className="text-white/50 hover:text-white transition-colors">
+              <Link href="/login" className="text-zinc-600 hover:text-zinc-900 transition-colors">
                 התחברות
               </Link>
-              <Link href="/register" className="text-white/50 hover:text-white transition-colors">
+              <Link href="/register" className="text-zinc-600 hover:text-zinc-900 transition-colors">
                 הרשמה
               </Link>
             </div>
