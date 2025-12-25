@@ -409,7 +409,7 @@ export default function EditLandingPagePage({
 
         {/* Center - Preview */}
         <div className="flex-1 overflow-y-auto bg-zinc-100 p-4">
-          <div className="min-h-full bg-white shadow-2xl border border-zinc-200 rounded-xl w-full">
+          <div className="min-h-full bg-white shadow-2xl border border-zinc-200 rounded-xl w-full overflow-hidden">
             {sections.length === 0 ? (
               <div className="text-center py-20 px-8">
                 <p className="text-zinc-700 mb-2 font-medium">אין סקשנים עדיין</p>
@@ -468,7 +468,7 @@ export default function EditLandingPagePage({
 
                     {/* Section Preview */}
                     {section.data.width === "full" ? (
-                      <div className="w-full -mx-4">
+                      <div className="w-full" style={{ marginLeft: '-1rem', marginRight: '-1rem', width: 'calc(100% + 2rem)' }}>
                         {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
