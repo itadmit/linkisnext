@@ -413,7 +413,7 @@ export default function EditLandingPagePage({
 
                     {/* Section Preview */}
                     <div className={section.data.width === "full" ? "w-full" : ""}>
-                      <div className={section.data.width === "container" || !section.data.width ? "max-w-4xl mx-auto px-8 py-4" : ""}>
+                      <div className={section.data.width === "container" || !section.data.width ? "max-w-4xl mx-auto p-8" : ""}>
                       {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
