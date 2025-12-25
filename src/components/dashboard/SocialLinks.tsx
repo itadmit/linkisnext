@@ -81,7 +81,7 @@ export function SocialLinks({ links, onChange }: SocialLinksProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-end">
         <Button
           type="button"
           variant="secondary"
@@ -91,12 +91,11 @@ export function SocialLinks({ links, onChange }: SocialLinksProps) {
           <FiPlus className="ml-2" />
           הוסף רשת חברתית
         </Button>
-        <h3 className="text-lg font-semibold text-white">רשתות חברתיות</h3>
       </div>
 
       {/* Platform Picker */}
       {showPlatforms && (
-        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 p-4 bg-white/5 rounded-xl border border-white/10">
+        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 p-4 bg-zinc-50 rounded-xl border border-zinc-200">
           {SOCIAL_PLATFORMS.filter(
             (p) => !links.find((l) => l.platform === p.id)
           ).map((platform) => (
@@ -104,13 +103,13 @@ export function SocialLinks({ links, onChange }: SocialLinksProps) {
               key={platform.id}
               type="button"
               onClick={() => addLink(platform.id)}
-              className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/10 transition-colors"
+              className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white transition-colors"
             >
               <platform.icon
                 size={24}
                 style={{ color: platform.color }}
               />
-              <span className="text-xs text-white/70">{platform.name}</span>
+              <span className="text-xs text-zinc-600">{platform.name}</span>
             </button>
           ))}
         </div>
@@ -125,7 +124,7 @@ export function SocialLinks({ links, onChange }: SocialLinksProps) {
           return (
             <div
               key={link.platform}
-              className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10"
+              className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl border border-zinc-200"
             >
               <div
                 className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
@@ -138,13 +137,13 @@ export function SocialLinks({ links, onChange }: SocialLinksProps) {
                 value={link.url}
                 onChange={(e) => updateUrl(link.platform, e.target.value)}
                 placeholder={platform.placeholder}
-                className="flex-1 bg-transparent border-none text-white placeholder-white/40 focus:outline-none text-sm"
+                className="flex-1 bg-transparent border-none text-zinc-900 placeholder-zinc-400 focus:outline-none text-sm focus:ring-0"
                 dir="ltr"
               />
               <button
                 type="button"
                 onClick={() => removeLink(link.platform)}
-                className="p-2 text-white/40 hover:text-red-400 transition-colors"
+                className="p-2 text-zinc-400 hover:text-red-500 transition-colors"
               >
                 <FiTrash2 size={18} />
               </button>
@@ -154,7 +153,7 @@ export function SocialLinks({ links, onChange }: SocialLinksProps) {
       </div>
 
       {links.length === 0 && !showPlatforms && (
-        <p className="text-white/40 text-sm text-center py-4">
+        <p className="text-zinc-500 text-sm text-center py-4">
           לחץ על &quot;הוסף רשת חברתית&quot; כדי להוסיף לינקים לרשתות שלך
         </p>
       )}

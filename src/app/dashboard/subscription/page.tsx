@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { PayPalProvider } from "@/components/providers/PayPalProvider";
 import { Button } from "@/components/ui/Button";
-import { FiCheck, FiClock, FiAlertTriangle } from "react-icons/fi";
+import { FiCheck, FiClock, FiAlertTriangle, FiX } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 interface Subscription {
@@ -126,7 +126,7 @@ function SubscriptionContent() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold text-zinc-900 tracking-tight mb-8">המנוי שלי</h1>
 
       {/* Current Status */}
@@ -150,68 +150,146 @@ function SubscriptionContent() {
           {getStatusBadge()}
         </div>
 
-        {/* Trial/Expired - Show PayPal */}
+        {/* Trial/Expired - Show Plans */}
         {(subscription?.subscriptionStatus === "trial" ||
           subscription?.subscriptionStatus === "expired") && (
           <div className="border-t border-zinc-100 pt-6">
-            <h3 className="text-base font-semibold text-zinc-900 mb-4">
-              שדרג למנוי פרימיום
+            <h3 className="text-base font-semibold text-zinc-900 mb-6 text-center">
+              בחר חבילה
             </h3>
-            <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-3xl font-bold text-zinc-900">
-                  $10<span className="text-lg text-zinc-500">/חודש</span>
+            
+            {/* Plans Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {/* Basic Plan - $10 */}
+              <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-6">
+                <div className="text-center mb-6">
+                  <div className="text-3xl font-bold text-zinc-900 mb-2">
+                    $10<span className="text-lg text-zinc-500">/חודש</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-zinc-900 mb-1">חבילה בסיסית</h4>
+                  <p className="text-zinc-500 text-sm">לינקים בלבד</p>
                 </div>
-                <div className="text-right">
-                  <p className="text-zinc-900 font-semibold">מנוי חודשי</p>
-                  <p className="text-zinc-500 text-sm">כל התכונות כלולות</p>
+                <ul className="text-zinc-700 space-y-3 text-right mb-6">
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">לינקים ללא הגבלה</span>
+                    <FiCheck className="text-emerald-600 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">אנליטיקס בסיסי</span>
+                    <FiCheck className="text-emerald-600 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">עיצוב מותאם אישית</span>
+                    <FiCheck className="text-emerald-600 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">קופונים חכמים</span>
+                    <FiCheck className="text-emerald-600 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">QR Code</span>
+                    <FiCheck className="text-emerald-600 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">תזמון לינקים</span>
+                    <FiCheck className="text-emerald-600 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm text-zinc-400 line-through">דפי נחיתה</span>
+                    <FiX className="text-zinc-400 shrink-0" size={16} />
+                  </li>
+                </ul>
+                <div className="paypal-buttons-container">
+                  <PayPalButtons
+                    style={{
+                      layout: "vertical",
+                      color: "blue",
+                      shape: "pill",
+                      label: "subscribe",
+                    }}
+                    createSubscription={(data, actions) => {
+                      return actions.subscription.create({
+                        plan_id: "P-BASIC-PLAN-ID", // Replace with your PayPal Basic plan ID
+                      });
+                    }}
+                    onApprove={async (data) => {
+                      if (data.subscriptionID) {
+                        await handleSubscriptionSuccess(data.subscriptionID);
+                      }
+                    }}
+                    onError={(err) => {
+                      console.error("PayPal error:", err);
+                      toast.error("שגיאה בתהליך התשלום");
+                    }}
+                  />
                 </div>
               </div>
-              <ul className="text-zinc-700 space-y-2 text-right mb-6">
-                <li className="flex items-center gap-2 justify-end">
-                  <span className="text-sm">לינקים ללא הגבלה</span>
-                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
-                </li>
-                <li className="flex items-center gap-2 justify-end">
-                  <span className="text-sm">אנליטיקס מתקדם</span>
-                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
-                </li>
-                <li className="flex items-center gap-2 justify-end">
-                  <span className="text-sm">עיצוב מותאם אישית</span>
-                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
-                </li>
-                <li className="flex items-center gap-2 justify-end">
-                  <span className="text-sm">קופונים חכמים</span>
-                  <FiCheck className="text-emerald-600 shrink-0" size={16} />
-                </li>
-              </ul>
-            </div>
 
-            {/* PayPal Button */}
-            <div className="paypal-buttons-container">
-              <PayPalButtons
-                style={{
-                  layout: "vertical",
-                  color: "blue",
-                  shape: "pill",
-                  label: "subscribe",
-                }}
-                createSubscription={(data, actions) => {
-                  return actions.subscription.create({
-                    plan_id: "P-XXXXXXXXXXXXXXXXXXXXXXXX", // Replace with your PayPal plan ID
-                  });
-                }}
-                onApprove={async (data) => {
-                  if (data.subscriptionID) {
-                    await handleSubscriptionSuccess(data.subscriptionID);
-                  }
-                }}
-                onError={(err) => {
-                  console.error("PayPal error:", err);
-                  toast.error("שגיאה בתהליך התשלום");
-                }}
-              />
+              {/* Premium Plan - $20 */}
+              <div className="bg-zinc-900 border-2 border-zinc-900 rounded-xl p-6 relative">
+                <div className="absolute top-4 left-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  מומלץ
+                </div>
+                <div className="text-center mb-6">
+                  <div className="text-3xl font-bold text-white mb-2">
+                    $20<span className="text-lg text-zinc-300">/חודש</span>
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-1">חבילה פרימיום</h4>
+                  <p className="text-zinc-300 text-sm">כולל דפי נחיתה</p>
+                </div>
+                <ul className="text-zinc-100 space-y-3 text-right mb-6">
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">כל התכונות של החבילה הבסיסית</span>
+                    <FiCheck className="text-emerald-400 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm font-semibold">דפי נחיתה ללא הגבלה</span>
+                    <FiCheck className="text-emerald-400 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">בילדר דפי נחיתה</span>
+                    <FiCheck className="text-emerald-400 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">ניהול לידים</span>
+                    <FiCheck className="text-emerald-400 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">אנליטיקס מתקדם</span>
+                    <FiCheck className="text-emerald-400 shrink-0" size={16} />
+                  </li>
+                  <li className="flex items-center gap-2 justify-end">
+                    <span className="text-sm">תמיכה עדיפות</span>
+                    <FiCheck className="text-emerald-400 shrink-0" size={16} />
+                  </li>
+                </ul>
+                <div className="paypal-buttons-container">
+                  <PayPalButtons
+                    style={{
+                      layout: "vertical",
+                      color: "gold",
+                      shape: "pill",
+                      label: "subscribe",
+                    }}
+                    createSubscription={(data, actions) => {
+                      return actions.subscription.create({
+                        plan_id: "P-PREMIUM-PLAN-ID", // Replace with your PayPal Premium plan ID
+                      });
+                    }}
+                    onApprove={async (data) => {
+                      if (data.subscriptionID) {
+                        await handleSubscriptionSuccess(data.subscriptionID);
+                      }
+                    }}
+                    onError={(err) => {
+                      console.error("PayPal error:", err);
+                      toast.error("שגיאה בתהליך התשלום");
+                    }}
+                  />
+                </div>
+              </div>
             </div>
+            
             <p className="text-zinc-400 text-xs text-center mt-4">
               התשלום מאובטח דרך PayPal
             </p>
@@ -229,33 +307,6 @@ function SubscriptionContent() {
             </p>
           </div>
         )}
-      </div>
-
-      {/* Features included */}
-      <div className="bg-white border border-zinc-200 rounded-xl p-6 shadow-sm">
-        <h3 className="text-base font-semibold text-zinc-900 mb-4">
-          מה כלול במנוי
-        </h3>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            "לינקים ללא הגבלה",
-            "אנליטיקס מתקדם",
-            "עיצוב מותאם אישית",
-            "קופונים חכמים",
-            "QR Code",
-            "תזמון לינקים",
-            "תמיכה בעברית",
-            "ללא פרסומות",
-          ].map((feature) => (
-            <div
-              key={feature}
-              className="flex items-center gap-2 text-zinc-700 justify-end text-sm"
-            >
-              <span>{feature}</span>
-              <FiCheck className="text-emerald-600 shrink-0" size={16} />
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

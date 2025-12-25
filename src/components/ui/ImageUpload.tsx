@@ -64,14 +64,14 @@ export function ImageUpload({ value, onChange, label }: ImageUploadProps) {
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium text-white/80 mb-2 text-right">
+        <label className="block text-sm font-medium text-zinc-900 mb-2 text-right">
           {label}
         </label>
       )}
       
       <div className="relative">
         {preview ? (
-          <div className="relative w-full h-48 rounded-xl overflow-hidden bg-white/5 border border-white/10">
+          <div className="relative w-full h-48 rounded-xl overflow-hidden bg-zinc-50 border border-zinc-200">
             <img
               src={preview}
               alt="Preview"
@@ -86,17 +86,17 @@ export function ImageUpload({ value, onChange, label }: ImageUploadProps) {
             </button>
           </div>
         ) : (
-          <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-white/20 rounded-xl cursor-pointer hover:border-indigo-500 hover:bg-white/5 transition-all duration-200">
+          <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-zinc-200 rounded-xl cursor-pointer hover:border-zinc-900 hover:bg-zinc-50 transition-all duration-200">
             <div className="flex flex-col items-center justify-center p-6">
               {isUploading ? (
-                <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-zinc-900 border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  <FiImage className="w-10 h-10 text-white/40 mb-3" />
-                  <p className="text-sm text-white/60 text-center">
+                  <FiImage className="w-10 h-10 text-zinc-400 mb-3" />
+                  <p className="text-sm text-zinc-600 text-center">
                     לחץ או גרור תמונה להעלאה
                   </p>
-                  <p className="text-xs text-white/40 mt-1">
+                  <p className="text-xs text-zinc-500 mt-1">
                     JPG, PNG, GIF, WebP • מקסימום 5MB
                   </p>
                 </>

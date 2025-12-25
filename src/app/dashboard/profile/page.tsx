@@ -196,7 +196,7 @@ export default function ProfilePage() {
   const pageUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/${user?.slug}`;
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold text-zinc-900 tracking-tight mb-8">הפרופיל שלי</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -206,7 +206,7 @@ export default function ProfilePage() {
           <div className="bg-white border border-zinc-200 rounded-xl overflow-hidden shadow-sm">
             <button
               onClick={() => toggleSection("profile")}
-              className="w-full flex items-center justify-between p-5 hover:bg-zinc-50 transition-colors border-b border-zinc-100"
+              className="w-full flex items-center justify-between p-5 hover:bg-zinc-50 hover:shadow-sm active:bg-zinc-100 transition-all duration-200 border-b border-zinc-100 cursor-pointer"
             >
               <span className="flex items-center gap-2 text-zinc-400">
                 {expandedSection === "profile" ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
@@ -228,7 +228,7 @@ export default function ProfilePage() {
           <div className="bg-white border border-zinc-200 rounded-xl overflow-hidden shadow-sm">
             <button
               onClick={() => toggleSection("social")}
-              className="w-full flex items-center justify-between p-5 hover:bg-zinc-50 transition-colors border-b border-zinc-100"
+              className="w-full flex items-center justify-between p-5 hover:bg-zinc-50 hover:shadow-sm active:bg-zinc-100 transition-all duration-200 border-b border-zinc-100 cursor-pointer"
             >
               <span className="flex items-center gap-2 text-zinc-400">
                 {expandedSection === "social" ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
@@ -238,9 +238,11 @@ export default function ProfilePage() {
             {expandedSection === "social" && (
               <div className="p-6 pt-0 space-y-4">
                 <SocialLinks links={socialLinks} onChange={setSocialLinks} />
-                <Button onClick={saveSocialLinks} isLoading={isSaving}>
-                  שמור רשתות חברתיות
-                </Button>
+                <div className="pt-4">
+                  <Button onClick={saveSocialLinks} isLoading={isSaving}>
+                    שמור רשתות חברתיות
+                  </Button>
+                </div>
               </div>
             )}
           </div>
@@ -249,7 +251,7 @@ export default function ProfilePage() {
           <div className="bg-white border border-zinc-200 rounded-xl overflow-hidden shadow-sm">
             <button
               onClick={() => toggleSection("advanced")}
-              className="w-full flex items-center justify-between p-5 hover:bg-zinc-50 transition-colors border-b border-zinc-100"
+              className="w-full flex items-center justify-between p-5 hover:bg-zinc-50 hover:shadow-sm active:bg-zinc-100 transition-all duration-200 border-b border-zinc-100 cursor-pointer"
             >
               <span className="flex items-center gap-2 text-zinc-400">
                 {expandedSection === "advanced" ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
@@ -293,10 +295,10 @@ export default function ProfilePage() {
                         key={style.id}
                         type="button"
                         onClick={() => setButtonStyle(style.id)}
-                        className={`p-4 border transition-all duration-200 rounded-lg ${
+                        className={`p-4 border transition-all duration-200 rounded-lg cursor-pointer ${
                           buttonStyle === style.id
                             ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
-                            : "border-zinc-200 hover:border-zinc-300 bg-white text-zinc-700"
+                            : "border-zinc-200 hover:border-zinc-300 hover:shadow-sm hover:bg-zinc-50 active:scale-95 bg-white text-zinc-700"
                         } ${style.preview}`}
                       >
                         <span className="text-sm font-medium">{style.name}</span>
@@ -316,10 +318,10 @@ export default function ProfilePage() {
                         key={template.id}
                         type="button"
                         onClick={() => setTheme(template.id)}
-                        className={`p-4 rounded-xl border transition-all duration-200 text-right ${
+                        className={`p-4 rounded-xl border transition-all duration-200 text-right cursor-pointer ${
                           theme === template.id
                             ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
-                            : "border-zinc-200 hover:border-zinc-300 bg-white text-zinc-700"
+                            : "border-zinc-200 hover:border-zinc-300 hover:shadow-sm hover:bg-zinc-50 active:scale-95 bg-white text-zinc-700"
                         }`}
                       >
                         <div className="font-semibold mb-1">{template.name}</div>
@@ -342,10 +344,10 @@ export default function ProfilePage() {
                           key={style.id}
                           type="button"
                           onClick={() => setBackgroundStyle(style.id)}
-                          className={`p-4 rounded-xl border transition-all duration-200 flex flex-col items-center gap-2 ${
+                          className={`p-4 rounded-xl border transition-all duration-200 flex flex-col items-center gap-2 cursor-pointer ${
                             backgroundStyle === style.id
                               ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
-                              : "border-zinc-200 hover:border-zinc-300 bg-white text-zinc-700"
+                              : "border-zinc-200 hover:border-zinc-300 hover:shadow-sm hover:bg-zinc-50 active:scale-95 bg-white text-zinc-700"
                           }`}
                         >
                           <IconComponent size={24} />
@@ -370,7 +372,7 @@ export default function ProfilePage() {
                       תיאור לשיתוף
                     </label>
                     <textarea
-                      className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent resize-none"
+                      className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 focus:border-zinc-400 hover:border-zinc-300 transition-all duration-200 resize-none"
                       rows={3}
                       placeholder="התיאור שיופיע בשיתוף לרשתות"
                       value={seoDescription}

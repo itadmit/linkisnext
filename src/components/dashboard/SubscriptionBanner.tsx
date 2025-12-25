@@ -44,7 +44,7 @@ export function SubscriptionBanner() {
 
   return (
     <div
-      className={`mb-6 rounded-lg p-4 flex items-center justify-between border shadow-sm ${
+      className={`mb-6 rounded-lg p-4 flex items-center justify-between border shadow-sm w-full ${
         isExpired
           ? "bg-red-50/50 border-red-100"
           : isUrgent

@@ -19,17 +19,17 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-900 disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-900 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
 
   const variants = {
     primary:
-      "bg-zinc-900 text-white hover:bg-zinc-800 shadow-sm border border-transparent",
+      "bg-zinc-900 text-white hover:bg-zinc-700 hover:shadow-md active:bg-zinc-800 shadow-sm border border-transparent",
     secondary:
-      "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50 focus:ring-zinc-200 shadow-sm",
+      "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300 hover:shadow-md active:bg-zinc-50 focus:ring-zinc-200 shadow-sm",
     danger:
-      "bg-white text-red-600 border border-red-200 hover:bg-red-50 focus:ring-red-500",
+      "bg-white text-red-600 border border-red-200 hover:bg-red-50 hover:border-red-300 hover:shadow-md active:bg-red-100 focus:ring-red-500",
     ghost:
-      "bg-transparent text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 focus:ring-zinc-200",
+      "bg-transparent text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 active:bg-zinc-200 focus:ring-zinc-200",
   };
 
   const sizes = {

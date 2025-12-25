@@ -25,25 +25,30 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" dir="rtl">
       <div
-        className="absolute inset-0 bg-white/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-zinc-900/20 backdrop-blur-sm"
         onClick={onClose}
       />
       <div 
-        className="relative bg-white rounded-xl shadow-2xl border border-zinc-200 w-full max-w-md max-h-[90vh] overflow-y-auto"
+        className="relative bg-white rounded-2xl border-2 border-zinc-300 w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-5 border-b border-zinc-100">
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b-2 border-zinc-200 bg-zinc-50">
+          <h2 className="text-xl font-bold text-zinc-900 tracking-tight">{title}</h2>
           <button
             onClick={onClose}
-            className="text-zinc-400 hover:text-zinc-900 transition-colors p-1 hover:bg-zinc-100 rounded-md"
+            className="text-zinc-400 hover:text-zinc-900 transition-colors p-2 hover:bg-zinc-200 rounded-lg border border-transparent hover:border-zinc-300"
           >
             <FiX size={20} />
           </button>
-          <h2 className="text-lg font-semibold text-zinc-900 tracking-tight">{title}</h2>
         </div>
-        <div className="p-5">{children}</div>
+        
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6 bg-white">
+          {children}
+        </div>
       </div>
     </div>
   );

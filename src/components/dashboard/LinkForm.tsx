@@ -79,8 +79,8 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
   return (
     <form onSubmit={handleSubmit} className="space-y-6" dir="rtl">
       {/* Icon Selection */}
-      <div>
-        <label className="block text-sm font-medium text-white/80 mb-3">
+      <div className="p-4 border border-zinc-200 rounded-xl bg-zinc-50/50">
+        <label className="block text-sm font-medium text-zinc-900 mb-3">
           אייקון
         </label>
         <IconPicker
@@ -139,9 +139,11 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
               })
             }
           />
-          <p className="text-sm text-amber-400">
-            * יופיע כפתור להעתקת הקופון לפני המעבר לאתר
-          </p>
+          <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+            <p className="text-sm text-amber-700 font-medium">
+              * יופיע כפתור להעתקת הקופון לפני המעבר לאתר
+            </p>
+          </div>
         </>
       )}
 
@@ -150,7 +152,7 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
         <button
           type="button"
           onClick={() => setShowScheduling(!showScheduling)}
-          className="flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
+          className="flex items-center gap-2 text-sm text-zinc-700 hover:text-zinc-900 hover:bg-zinc-50 px-4 py-2.5 rounded-lg border border-zinc-200 hover:border-zinc-300 bg-white transition-all duration-200 cursor-pointer active:scale-95"
         >
           <FiClock size={16} />
           {showScheduling ? "הסתר תזמון" : "הוסף תזמון"}
@@ -159,7 +161,7 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
 
       {/* Scheduling Fields */}
       {showScheduling && (
-        <div className="space-y-4">
+        <div className="space-y-4 p-4 border border-zinc-200 rounded-xl bg-zinc-50/30">
           <div className="grid grid-cols-2 gap-4">
             <Input
               label="מתאריך"
@@ -189,16 +191,16 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
             />
           </div>
           {(formData.startsAt || formData.endsAt) && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700">
-              <p className="font-medium mb-1 flex items-center gap-2">
-                <FiInfo size={16} />
+            <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4 text-sm text-blue-800">
+              <p className="font-semibold mb-2 flex items-center gap-2">
+                <FiInfo size={18} />
                 מידע על תזמון:
               </p>
               {formData.startsAt && (
-                <p>הלינק יופיע החל מ: {new Date(formData.startsAt).toLocaleString("he-IL")}</p>
+                <p className="mb-1">הלינק יופיע החל מ: <span className="font-medium">{new Date(formData.startsAt).toLocaleString("he-IL")}</span></p>
               )}
               {formData.endsAt && (
-                <p>הלינק יופיע עד: {new Date(formData.endsAt).toLocaleString("he-IL")}</p>
+                <p>הלינק יופיע עד: <span className="font-medium">{new Date(formData.endsAt).toLocaleString("he-IL")}</span></p>
               )}
             </div>
           )}
@@ -206,11 +208,11 @@ export function LinkForm({ link, onSubmit, onCancel, isLoading }: LinkFormProps)
       )}
 
       {/* Actions */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 pt-4 border-t border-zinc-200">
         <Button type="submit" isLoading={isLoading} className="flex-1">
           {link ? "עדכן לינק" : "הוסף לינק"}
         </Button>
-        <Button type="button" variant="secondary" onClick={onCancel}>
+        <Button type="button" variant="secondary" onClick={onCancel} className="border-2">
           ביטול
         </Button>
       </div>

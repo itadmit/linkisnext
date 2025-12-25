@@ -46,10 +46,10 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium ${
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium cursor-pointer ${
                 isActive
                   ? "bg-zinc-100 text-zinc-900 shadow-sm border border-zinc-200/50"
-                  : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
+                  : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:shadow-sm active:scale-[0.98]"
               }`}
             >
               <item.icon size={18} className={isActive ? "text-zinc-900" : "text-zinc-400"} />
@@ -63,7 +63,7 @@ export function Sidebar() {
           <Link
             href={`/${session.user.slug}`}
             target="_blank"
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 transition-all duration-200 text-sm font-medium mt-6 border border-transparent hover:border-zinc-200"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:shadow-sm active:scale-[0.98] transition-all duration-200 text-sm font-medium mt-6 border border-transparent hover:border-zinc-200 cursor-pointer"
           >
             <FiExternalLink size={18} />
             <span>צפה בדף</span>
@@ -88,7 +88,7 @@ export function Sidebar() {
         </div>
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
-          className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-zinc-500 hover:text-red-600 hover:bg-red-50/50 transition-all duration-200 w-full text-xs font-medium"
+          className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-zinc-500 hover:text-red-600 hover:bg-red-50/50 hover:shadow-sm active:scale-[0.98] transition-all duration-200 w-full text-xs font-medium cursor-pointer"
         >
           <FiLogOut size={14} />
           <span>התנתק</span>

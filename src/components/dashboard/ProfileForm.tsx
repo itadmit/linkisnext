@@ -142,11 +142,11 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
 
       {/* Bio */}
       <div>
-        <label className="block text-sm font-medium text-white/80 mb-2">
+        <label className="block text-sm font-medium text-zinc-900 mb-2">
           ביו
         </label>
         <textarea
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm resize-none"
+          className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 focus:border-zinc-400 transition-all duration-200 resize-none hover:border-zinc-300"
           rows={3}
           placeholder="ספר על עצמך..."
           value={formData.bio || ""}
@@ -157,7 +157,7 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
 
       {/* Theme Presets */}
       <div>
-        <label className="block text-sm font-medium text-white/80 mb-3">
+        <label className="block text-sm font-medium text-zinc-900 mb-3">
           ערכות נושא מוכנות
         </label>
         <div className="grid grid-cols-3 gap-3">
@@ -166,7 +166,7 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
               key={theme.name}
               type="button"
               onClick={() => applyTheme(theme)}
-              className="p-3 rounded-xl border border-white/20 hover:border-indigo-500 transition-all duration-200"
+              className="p-3 rounded-xl border border-zinc-200 hover:border-zinc-900 transition-all duration-200"
               style={{ backgroundColor: theme.backgroundColor }}
             >
               <div
@@ -187,7 +187,7 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
       {/* Custom Colors */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">
+          <label className="block text-sm font-medium text-zinc-900 mb-2">
             צבע רקע
           </label>
           <div className="flex items-center gap-2">
@@ -205,13 +205,13 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, backgroundColor: e.target.value })
               }
-              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm"
+              className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               dir="ltr"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">
+          <label className="block text-sm font-medium text-zinc-900 mb-2">
             צבע טקסט
           </label>
           <div className="flex items-center gap-2">
@@ -229,13 +229,13 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, textColor: e.target.value })
               }
-              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm"
+              className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               dir="ltr"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">
+          <label className="block text-sm font-medium text-zinc-900 mb-2">
             צבע כפתורים
           </label>
           <div className="flex items-center gap-2">
@@ -253,13 +253,13 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, buttonColor: e.target.value })
               }
-              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm"
+              className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               dir="ltr"
             />
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/80 mb-2">
+          <label className="block text-sm font-medium text-zinc-900 mb-2">
             צבע טקסט בכפתורים
           </label>
           <div className="flex items-center gap-2">
@@ -277,7 +277,7 @@ export function ProfileForm({ user, onSubmit, isLoading }: ProfileFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, buttonTextColor: e.target.value })
               }
-              className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white text-sm"
+              className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-lg text-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
               dir="ltr"
             />
           </div>

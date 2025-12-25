@@ -54,7 +54,7 @@ export function LinkCard({ link, onEdit, onDelete, onToggle }: LinkCardProps) {
         <button
           {...attributes}
           {...listeners}
-          className="text-zinc-300 hover:text-zinc-600 cursor-grab active:cursor-grabbing p-1.5 hover:bg-zinc-50 rounded-md transition-colors"
+          className="text-zinc-300 hover:text-zinc-600 cursor-grab active:cursor-grabbing p-1.5 hover:bg-zinc-50 hover:shadow-sm rounded-md transition-all duration-200"
         >
           <FiMenu size={18} />
         </button>
@@ -90,10 +90,10 @@ export function LinkCard({ link, onEdit, onDelete, onToggle }: LinkCardProps) {
         <div className="flex items-center gap-1">
           <button
             onClick={() => onToggle(link.id, !link.isActive)}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-2 rounded-lg transition-all duration-200 cursor-pointer ${
               link.isActive
-                ? "text-emerald-600 hover:bg-emerald-50"
-                : "text-zinc-400 hover:bg-zinc-100"
+                ? "text-emerald-600 hover:bg-emerald-50 hover:shadow-sm active:scale-95"
+                : "text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 hover:shadow-sm active:scale-95"
             }`}
             title={link.isActive ? "הסתר לינק" : "הצג לינק"}
           >
@@ -101,14 +101,14 @@ export function LinkCard({ link, onEdit, onDelete, onToggle }: LinkCardProps) {
           </button>
           <button
             onClick={() => onEdit(link)}
-            className="p-2 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+            className="p-2 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 hover:shadow-sm active:scale-95 transition-all duration-200 cursor-pointer"
             title="ערוך"
           >
             <FiEdit2 size={18} />
           </button>
           <button
             onClick={() => onDelete(link.id)}
-            className="p-2 rounded-lg text-zinc-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+            className="p-2 rounded-lg text-zinc-400 hover:text-red-600 hover:bg-red-50 hover:shadow-sm active:scale-95 transition-all duration-200 cursor-pointer"
             title="מחק"
           >
             <FiTrash2 size={18} />

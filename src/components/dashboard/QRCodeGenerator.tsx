@@ -38,10 +38,10 @@ export function QRCodeGenerator({ url, slug }: QRCodeGeneratorProps) {
           fgColor="#1a1a2e"
         />
       </div>
-      <p className="text-sm text-white/60 text-center">
+      <p className="text-sm text-zinc-600 text-center">
         סרוק את הקוד כדי לגשת לדף שלך
       </p>
-      <p className="text-xs text-white/40 break-all text-center">{url}</p>
+      <p className="text-xs text-zinc-500 break-all text-center">{url}</p>
       <Button variant="secondary" onClick={downloadQRCode}>
         <FiDownload className="ml-2" />
         הורד QR Code
