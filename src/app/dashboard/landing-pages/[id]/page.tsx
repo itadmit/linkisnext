@@ -349,8 +349,12 @@ export default function EditLandingPagePage({
         )}
 
         {/* Center - Preview */}
-        <div className="flex-1 overflow-y-auto bg-zinc-100 p-8">
-          <div className="max-w-4xl mx-auto min-h-full bg-white rounded-xl shadow-2xl border border-zinc-200 p-8">
+        <div className="flex-1 overflow-y-auto bg-zinc-100">
+          <div className={`min-h-full bg-white shadow-2xl border border-zinc-200 ${
+            sections.some(s => s.data.width === "full") 
+              ? "w-full" 
+              : "max-w-4xl mx-auto p-8 rounded-xl"
+          }`}>
             {sections.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-zinc-700 mb-2 font-medium">אין סקשנים עדיין</p>
@@ -408,8 +412,8 @@ export default function EditLandingPagePage({
                     </div>
 
                     {/* Section Preview */}
-                    <div className={section.data.width === "full" ? "w-full -mx-8" : ""}>
-                      <div className={section.data.width === "container" || !section.data.width ? "max-w-4xl mx-auto" : ""}>
+                    <div className={section.data.width === "full" ? "w-full" : ""}>
+                      <div className={section.data.width === "container" || !section.data.width ? "max-w-4xl mx-auto px-8 py-4" : ""}>
                       {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
