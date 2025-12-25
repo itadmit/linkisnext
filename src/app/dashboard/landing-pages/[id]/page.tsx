@@ -427,8 +427,8 @@ export default function EditLandingPagePage({
                     key={section.id}
                     className={`rounded-xl transition-all cursor-pointer group relative overflow-hidden ${
                       selectedSectionId === section.id
-                        ? "ring-2 ring-zinc-900 ring-offset-2 border-2 border-dashed border-zinc-300"
-                        : "hover:ring-2 hover:ring-zinc-300 hover:ring-offset-2 hover:border-2 hover:border-dashed hover:border-zinc-300"
+                        ? "border-2 border-dashed border-zinc-300"
+                        : "hover:border-2 hover:border-dashed hover:border-zinc-300"
                     }`}
                     onClick={() => setSelectedSectionId(section.id)}
                   >
