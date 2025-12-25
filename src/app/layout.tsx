@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "@/components/providers/SessionProvider";
+import { TranslationProvider } from "@/lib/i18n/useTranslation";
 import { Toaster } from "react-hot-toast";
 
 const rubik = Rubik({ 
@@ -22,19 +23,21 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <body className={`${rubik.variable} font-sans antialiased`}>
-        <SessionProvider>
-          {children}
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              style: {
-                background: "#1e293b",
-                color: "#fff",
-                border: "1px solid rgba(255,255,255,0.1)",
-              },
-            }}
-          />
-        </SessionProvider>
+        <TranslationProvider>
+          <SessionProvider>
+            {children}
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                style: {
+                  background: "#1e293b",
+                  color: "#fff",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                },
+              }}
+            />
+          </SessionProvider>
+        </TranslationProvider>
       </body>
     </html>
   );

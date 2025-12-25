@@ -5,71 +5,57 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { FiLink, FiBarChart2, FiClock, FiSmartphone, FiZap, FiShield, FiArrowDown, FiCheck, FiStar, FiSend, FiCamera, FiTwitter, FiYoutube, FiGlobe, FiGift, FiUser, FiX } from "react-icons/fi";
+import { useTranslation } from "@/lib/i18n/useTranslation";
+import { CountryModal } from "@/components/home/CountryModal";
 
-const features = [
-  {
-    icon: FiLink,
-    title: "לינקים ללא הגבלה",
-    description: "הוסף כמה לינקים שתרצה לדף שלך",
-  },
-  {
-    icon: FiBarChart2,
-    title: "אנליטיקס מתקדם",
-    description: "עקוב אחר קליקים וביצועים בזמן אמת",
-  },
-  {
-    icon: FiClock,
-    title: "תזמון לינקים",
-    description: "קבע מתי הלינקים שלך יופיעו",
-  },
-  {
-    icon: FiSmartphone,
-    title: "QR Code",
-    description: "שתף את הדף שלך בקלות עם קוד QR",
-  },
-  {
-    icon: FiZap,
-    title: "קופונים חכמים",
-    description: "הוסף קופונים עם העתקה אוטומטית",
-  },
-  {
-    icon: FiShield,
-    title: "עיצוב מותאם",
-    description: "התאם את העיצוב למותג שלך",
-  },
-];
-
-const testimonials = [
-  {
-    name: "יוסי כהן",
-    role: "יוצר תוכן",
-    text: "מאז שעברתי ל-LinkHub, ראיתי עלייה של 40% בקליקים! הממשק פשוט מדהים.",
-    avatar: FiUser,
-  },
-  {
-    name: "מיכל לוי",
-    role: "בלוגרית",
-    text: "הקופונים החכמים עוזרים לי לשתף הנחות עם העוקבים שלי בקלות רבה.",
-    avatar: FiUser,
-  },
-  {
-    name: "דני אברהם",
-    role: "בעל עסק",
-    text: "האנליטיקס המתקדם נותן לי תובנות חשובות על הקהל שלי. ממליץ בחום!",
-    avatar: FiUser,
-  },
-];
 
 export default function HomePage() {
   const { data: session } = useSession();
   const [mounted, setMounted] = useState(false);
+  const { t, isRTL } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    // Update HTML dir attribute based on language
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+  }, [isRTL]);
+
+  const features = [
+    {
+      icon: FiLink,
+      title: t("features.unlimitedLinks"),
+      description: t("features.unlimitedLinksDesc"),
+    },
+    {
+      icon: FiBarChart2,
+      title: t("features.analytics"),
+      description: t("features.analyticsDesc"),
+    },
+    {
+      icon: FiClock,
+      title: t("features.scheduling"),
+      description: t("features.schedulingDesc"),
+    },
+    {
+      icon: FiSmartphone,
+      title: t("features.qrCode"),
+      description: t("features.qrCodeDesc"),
+    },
+    {
+      icon: FiZap,
+      title: t("features.coupons"),
+      description: t("features.couponsDesc"),
+    },
+    {
+      icon: FiShield,
+      title: t("features.customDesign"),
+      description: t("features.customDesignDesc"),
+    },
+  ];
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className={`min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100`} dir={isRTL ? "rtl" : "ltr"}>
+      <CountryModal />
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-zinc-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,7 +93,7 @@ export default function HomePage() {
           >
             <span className="text-indigo-600 text-sm font-medium flex items-center gap-2">
               <FiStar size={16} />
-              7 ימי ניסיון בחינם
+              {t("hero.badge")}
             </span>
           </div>
           <h2
@@ -115,10 +101,10 @@ export default function HomePage() {
               mounted ? "animate-slide-up" : "opacity-0"
             }`}
           >
-            כל הלינקים שלך
+            {t("hero.title")}
             <br />
             <span className="text-indigo-600">
-              במקום אחד
+              {t("hero.titleHighlight")}
             </span>
           </h2>
           <p
@@ -126,7 +112,7 @@ export default function HomePage() {
               mounted ? "animate-slide-up stagger-2" : "opacity-0"
             }`}
           >
-            צור דף לינקים מקצועי תוך דקות. שתף את כל הלינקים שלך, עקוב אחר הביצועים, והתאם את העיצוב למותג שלך.
+            {t("hero.description")}
           </p>
           <div
             className={`flex flex-col sm:flex-row gap-4 justify-center ${
@@ -135,13 +121,13 @@ export default function HomePage() {
           >
             <Link href="/register">
               <Button size="lg">
-                התחל בחינם →
+                {t("hero.cta")}
               </Button>
             </Link>
             <a href="#features">
               <Button variant="secondary" size="lg" className="bg-white text-zinc-900 border-zinc-300">
-                <FiArrowDown className="ml-2 animate-bounce" />
-                גלה עוד
+                <FiArrowDown className={`${isRTL ? "mr-2" : "ml-2"} animate-bounce`} />
+                {t("hero.learnMore")}
               </Button>
             </a>
           </div>
@@ -200,10 +186,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
-              כל מה שאתה צריך
+              {t("features.title")}
             </h3>
             <p className="text-zinc-600 text-lg">
-              תכונות מתקדמות שיעזרו לך להצליח
+              {t("features.subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -230,10 +216,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
-              מה אומרים עלינו
+              {t("testimonials.title")}
             </h3>
             <p className="text-zinc-600 text-lg">
-              אלפי משתמשים כבר משתמשים ב-LinkHub
+              {t("testimonials.subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -266,73 +252,73 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
-              בחר את החבילה המתאימה לך
+              {t("pricing.title")}
             </h3>
             <p className="text-zinc-600 text-lg">
-              שתי אפשרויות פשוטות - בחר מה שמתאים לך
+              {t("pricing.subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Basic Plan */}
             <div className="bg-white border-2 border-zinc-200 rounded-2xl p-8 hover:border-indigo-300 hover:shadow-xl transition-all duration-300">
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-bold text-zinc-900 mb-2">חבילה בסיסית</h4>
-                <p className="text-zinc-600 text-sm mb-6">לינקים בלבד</p>
+                <h4 className="text-2xl font-bold text-zinc-900 mb-2">{t("pricing.basic")}</h4>
+                <p className="text-zinc-600 text-sm mb-6">{t("pricing.basicDesc")}</p>
                 <div className="mb-6">
                   <span className="text-5xl font-bold text-zinc-900">$10</span>
-                  <span className="text-zinc-600 mr-2">/ חודש</span>
+                  <span className={`text-zinc-600 ${isRTL ? "mr-2" : "ml-2"}`}>{t("pricing.perMonth")}</span>
                 </div>
               </div>
-              <ul className="text-zinc-700 space-y-4 mb-8 text-right">
+              <ul className={`text-zinc-700 space-y-4 mb-8 ${isRTL ? "text-right" : "text-left"}`}>
                 {[
-                  "לינקים ללא הגבלה",
-                  "אנליטיקס בסיסי",
-                  "עיצוב מותאם אישית",
-                  "קופונים חכמים",
-                  "QR Code",
-                  "תזמון לינקים",
-                  "רשתות חברתיות",
+                  t("pricing.features.unlimitedLinks"),
+                  t("pricing.features.basicAnalytics"),
+                  t("pricing.features.customDesign"),
+                  t("pricing.features.smartCoupons"),
+                  t("pricing.features.qrCode"),
+                  t("pricing.features.linkScheduling"),
+                  t("pricing.features.socialLinks"),
                 ].map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 justify-end">
+                  <li key={feature} className={`flex items-center gap-2 ${isRTL ? "justify-end" : "justify-start"}`}>
                     <span className="text-sm">{feature}</span>
                     <FiCheck className="text-green-500 shrink-0" size={18} />
                   </li>
                 ))}
-                <li className="flex items-center gap-2 justify-end text-zinc-400">
-                  <span className="text-sm">דפי נחיתה</span>
+                <li className={`flex items-center gap-2 text-zinc-400 ${isRTL ? "justify-end" : "justify-start"}`}>
+                  <span className="text-sm">{t("pricing.features.landingPages")}</span>
                   <FiX className="text-red-400 shrink-0" size={18} />
                 </li>
               </ul>
               <Link href="/register">
                 <Button size="lg" className="w-full" variant="secondary">
-                  התחל בחינם
+                  {t("pricing.startFree")}
                 </Button>
               </Link>
             </div>
 
             {/* Premium Plan */}
             <div className="bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-300 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 relative">
-              <div className="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                מומלץ
+              <div className={`absolute top-4 ${isRTL ? "left-4" : "right-4"} bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full`}>
+                {t("pricing.recommended")}
               </div>
               <div className="text-center mb-8">
-                <h4 className="text-2xl font-bold text-zinc-900 mb-2">חבילה פרימיום</h4>
-                <p className="text-zinc-700 text-sm mb-6">כולל דפי נחיתה</p>
+                <h4 className="text-2xl font-bold text-zinc-900 mb-2">{t("pricing.premium")}</h4>
+                <p className="text-zinc-700 text-sm mb-6">{t("pricing.premiumDesc")}</p>
                 <div className="mb-6">
                   <span className="text-5xl font-bold text-zinc-900">$20</span>
-                  <span className="text-zinc-600 mr-2">/ חודש</span>
+                  <span className={`text-zinc-600 ${isRTL ? "mr-2" : "ml-2"}`}>{t("pricing.perMonth")}</span>
                 </div>
               </div>
-              <ul className="text-zinc-800 space-y-4 mb-8 text-right">
+              <ul className={`text-zinc-800 space-y-4 mb-8 ${isRTL ? "text-right" : "text-left"}`}>
                 {[
-                  "כל התכונות של החבילה הבסיסית",
-                  "דפי נחיתה ללא הגבלה",
-                  "בילדר דפי נחיתה",
-                  "ניהול לידים",
-                  "אנליטיקס מתקדם",
-                  "תמיכה עדיפות",
+                  t("pricing.features.allBasicFeatures"),
+                  t("pricing.features.unlimitedLandingPages"),
+                  t("pricing.features.landingPageBuilder"),
+                  t("pricing.features.leadManagement"),
+                  t("pricing.features.advancedAnalytics"),
+                  t("pricing.features.prioritySupport"),
                 ].map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 justify-end">
+                  <li key={feature} className={`flex items-center gap-2 ${isRTL ? "justify-end" : "justify-start"}`}>
                     <span className="text-sm font-medium">{feature}</span>
                     <FiCheck className="text-green-600 shrink-0" size={18} />
                   </li>
@@ -340,13 +326,13 @@ export default function HomePage() {
               </ul>
               <Link href="/register">
                 <Button size="lg" className="w-full">
-                  התחל בחינם
+                  {t("pricing.startFree")}
                 </Button>
               </Link>
             </div>
           </div>
           <p className="text-zinc-500 text-sm text-center mt-8">
-            7 ימי ניסיון בחינם • ללא כרטיס אשראי לניסיון
+            {t("pricing.trial")}
           </p>
         </div>
       </section>
@@ -357,15 +343,15 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-4xl font-bold text-indigo-600 mb-2">10K+</div>
-              <p className="text-zinc-600">משתמשים פעילים</p>
+              <p className="text-zinc-600">{t("stats.activeUsers")}</p>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-indigo-600 mb-2">50K+</div>
-              <p className="text-zinc-600">לינקים שנוצרו</p>
+              <p className="text-zinc-600">{t("stats.linksCreated")}</p>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-indigo-600 mb-2">99.9%</div>
-              <p className="text-zinc-600">זמן פעילות</p>
+              <p className="text-zinc-600">{t("stats.uptime")}</p>
             </div>
           </div>
         </div>
@@ -376,10 +362,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
-              איך זה עובד?
+              {t("howItWorks.title")}
             </h3>
             <p className="text-zinc-600 text-lg">
-              שלושה שלבים פשוטים להתחלה
+              {t("howItWorks.subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -387,22 +373,22 @@ export default function HomePage() {
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-indigo-600">1</span>
               </div>
-              <h4 className="text-xl font-semibold text-zinc-900 mb-2">הירשם בחינם</h4>
-              <p className="text-zinc-600">צור חשבון תוך דקות ללא כרטיס אשראי</p>
+              <h4 className="text-xl font-semibold text-zinc-900 mb-2">{t("howItWorks.step1")}</h4>
+              <p className="text-zinc-600">{t("howItWorks.step1Desc")}</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-indigo-600">2</span>
               </div>
-              <h4 className="text-xl font-semibold text-zinc-900 mb-2">הוסף לינקים</h4>
-              <p className="text-zinc-600">הוסף את כל הלינקים שלך והתאם את העיצוב</p>
+              <h4 className="text-xl font-semibold text-zinc-900 mb-2">{t("howItWorks.step2")}</h4>
+              <p className="text-zinc-600">{t("howItWorks.step2Desc")}</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-indigo-600">3</span>
               </div>
-              <h4 className="text-xl font-semibold text-zinc-900 mb-2">שתף עם העולם</h4>
-              <p className="text-zinc-600">שתף את הדף שלך ועקוב אחר הביצועים</p>
+              <h4 className="text-xl font-semibold text-zinc-900 mb-2">{t("howItWorks.step3")}</h4>
+              <p className="text-zinc-600">{t("howItWorks.step3Desc")}</p>
             </div>
           </div>
         </div>
@@ -412,14 +398,14 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <h3 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-4">
-            מוכן להתחיל?
+            {t("cta.title")}
           </h3>
           <p className="text-zinc-600 text-lg mb-8">
-            הצטרף לאלפי משתמשים שכבר משתמשים ב-LinkHub
+            {t("cta.subtitle")}
           </p>
           <Link href="/register">
             <Button size="lg">
-              צור את הדף שלך עכשיו →
+              {t("cta.button")}
             </Button>
           </Link>
         </div>
@@ -430,14 +416,14 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-zinc-600">
-              © 2024 LinkHub. כל הזכויות שמורות.
+              {t("footer.copyright")}
             </p>
             <div className="flex items-center gap-6">
               <Link href="/login" className="text-zinc-600 hover:text-zinc-900 transition-colors">
-                התחברות
+                {t("footer.login")}
               </Link>
               <Link href="/register" className="text-zinc-600 hover:text-zinc-900 transition-colors">
-                הרשמה
+                {t("footer.register")}
               </Link>
             </div>
           </div>
