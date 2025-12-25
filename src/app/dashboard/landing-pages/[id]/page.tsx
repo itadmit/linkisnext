@@ -471,7 +471,7 @@ export default function EditLandingPagePage({
 
                     {/* Section Preview */}
                     {section.data.width === "full" ? (
-                      <div className="w-full" style={{ marginLeft: '-1rem', marginRight: '-1rem', width: 'calc(100% + 2rem)', maxWidth: 'calc(100% + 2rem)' }} className="-mx-4">
+                      <div className="w-full -mx-4" style={{ marginLeft: '-1rem', marginRight: '-1rem', width: 'calc(100% + 2rem)', maxWidth: 'calc(100% + 2rem)' }}>
                         {section.type === "hero" && (
                         <div
                           className="text-center py-12 rounded-lg"
