@@ -124,3 +124,4 @@ export function AnimatedBackground({ color, variant = "gradient" }: AnimatedBack
   );
 }
 
+
