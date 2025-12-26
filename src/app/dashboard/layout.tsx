@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { SubscriptionBanner } from "@/components/dashboard/SubscriptionBanner";
 import { NotificationsDropdown } from "@/components/dashboard/NotificationsDropdown";
+import { KeyboardShortcuts } from "@/components/dashboard/KeyboardShortcuts";
 import { FiSearch } from "react-icons/fi";
 
 export default function DashboardLayout({
@@ -46,11 +47,12 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-zinc-100" dir="rtl">
+    <div className="flex min-h-screen bg-zinc-100 dark:bg-zinc-900" dir="rtl">
+      <KeyboardShortcuts />
       <Sidebar />
       <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
-        <nav className="bg-white border-b border-zinc-200 px-8 py-4 shadow-sm">
+        <nav className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 px-8 py-4 shadow-sm">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex-1 max-w-md">
               <div className="relative">
@@ -58,7 +60,7 @@ export default function DashboardLayout({
                 <input
                   type="text"
                   placeholder="חפש..."
-                  className="w-full pr-10 pl-4 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent"
+                  className="w-full pr-10 pl-4 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 focus:border-transparent"
                 />
               </div>
             </div>
@@ -69,10 +71,10 @@ export default function DashboardLayout({
                   {session?.user?.name?.[0] || session?.user?.email?.[0]}
                 </div>
                 <div className="hidden sm:block text-right">
-                  <p className="text-sm font-medium text-zinc-900">
+                  <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
                     {session?.user?.name || "משתמש"}
                   </p>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
                     {session?.user?.email}
                   </p>
                 </div>

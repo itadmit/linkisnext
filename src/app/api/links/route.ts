@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { isValidUrl, sanitizeUrl } from "@/lib/validators";
 import { logger } from "@/lib/logger";
+import { cache, cacheKeys } from "@/lib/cache";
 
 // Get all links for the current user
 export async function GET() {
@@ -18,10 +19,21 @@ export async function GET() {
 
     userId = session.user.id;
 
+    // Check cache first
+    const cacheKey = cacheKeys.userLinks(userId);
+    const cachedLinks = cache.get(cacheKey);
+    
+    if (cachedLinks) {
+      return NextResponse.json(cachedLinks);
+    }
+
     const links = await prisma.link.findMany({
       where: { userId: session.user.id },
       orderBy: { order: "asc" },
     });
+
+    // Cache for 1 minute
+    cache.set(cacheKey, links, 60);
 
     return NextResponse.json(links);
   } catch (error) {
@@ -104,6 +116,9 @@ export async function POST(req: NextRequest) {
     });
 
     logger.info("Link created", { linkId: link.id, userId: session.user.id });
+
+    // Invalidate cache
+    cache.delete(cacheKeys.userLinks(session.user.id));
 
     return NextResponse.json(link);
   } catch (error) {

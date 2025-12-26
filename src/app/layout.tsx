@@ -4,6 +4,7 @@ import "./globals.css";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { TranslationProvider } from "@/lib/i18n/useTranslation";
 import { Toaster } from "react-hot-toast";
+import { ThemeScript } from "@/components/providers/ThemeScript";
 
 const rubik = Rubik({ 
   subsets: ["latin", "hebrew"],
@@ -21,8 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="he" dir="rtl">
-      <body className={`${rubik.variable} font-sans antialiased`}>
+    <html lang="he" dir="rtl" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
+      <body className={`${rubik.variable} font-sans antialiased bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors`}>
         <TranslationProvider>
           <SessionProvider>
             {children}

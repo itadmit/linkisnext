@@ -51,6 +51,9 @@ const BACKGROUND_STYLES = [
 const TEMPLATES = [
   { id: "default", name: "ברירת מחדל", description: "עיצוב קלאסי" },
   { id: "linkiz", name: "לינקיז", description: "עיצוב נקי ומינימליסטי" },
+  { id: "modern", name: "מודרני", description: "עיצוב מודרני עם אנימציות" },
+  { id: "minimal", name: "מינימליסטי", description: "עיצוב מינימליסטי מאוד" },
+  { id: "card", name: "כרטיסים", description: "עיצוב כרטיסים אלגנטי" },
 ];
 
 export default function ProfilePage() {

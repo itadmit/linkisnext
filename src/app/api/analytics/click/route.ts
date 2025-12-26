@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { logger } from "@/lib/logger";
+import { sendWebhook, WEBHOOK_EVENTS } from "@/lib/api/webhooks";
 
 export async function POST(req: NextRequest) {
   let linkId: string | undefined;
@@ -30,6 +31,16 @@ export async function POST(req: NextRequest) {
     else if (/safari/i.test(userAgent)) browser = "safari";
     else if (/edge/i.test(userAgent)) browser = "edge";
 
+    // Get link info for webhook
+    const link = await prisma.link.findUnique({
+      where: { id: linkId },
+      select: { title: true, url: true, userId: true },
+    });
+
+    if (!link) {
+      return NextResponse.json({ error: "לינק לא נמצא" }, { status: 404 });
+    }
+
     // Use transaction to ensure both operations succeed or fail together
     await prisma.$transaction([
       // Create analytics record
@@ -49,6 +60,33 @@ export async function POST(req: NextRequest) {
         data: { clicks: { increment: 1 } },
       }),
     ]);
+
+    // Trigger webhook if configured (async, don't wait)
+    // TODO: Get webhook configs from database
+    // For now, webhooks are triggered but not stored
+    sendWebhook(
+      {
+        url: process.env.WEBHOOK_URL || "",
+        events: [WEBHOOK_EVENTS.LINK_CLICKED],
+        enabled: !!process.env.WEBHOOK_URL,
+      },
+      {
+        type: WEBHOOK_EVENTS.LINK_CLICKED,
+        payload: {
+          linkId,
+          linkTitle: link.title,
+          linkUrl: link.url,
+          userId: link.userId,
+          device,
+          browser,
+          referer,
+          timestamp: new Date().toISOString(),
+        },
+        timestamp: new Date().toISOString(),
+      }
+    ).catch((error) => {
+      logger.error("Webhook trigger failed", error instanceof Error ? error : new Error(String(error)));
+    });
 
     return NextResponse.json({ success: true });
   } catch (error) {

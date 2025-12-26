@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { FiCopy, FiCheck, FiExternalLink, FiGift } from "react-icons/fi";
 import { SocialIcons } from "@/components/public/SocialIcons";
+import { SocialShare } from "@/components/public/SocialShare";
 import { IconRenderer } from "@/lib/icons";
 import toast from "react-hot-toast";
 
@@ -153,6 +154,15 @@ export function PublicPageClient({ user }: PublicPageClientProps) {
 
             {/* Social Icons */}
             <SocialIcons links={socialLinks} textColor={user.textColor} />
+            
+            {/* Share Buttons */}
+            <div className="mt-4 flex justify-center">
+              <SocialShare
+                url={typeof window !== "undefined" ? window.location.href : ""}
+                title={user.name || user.slug}
+                description={user.bio || undefined}
+              />
+            </div>
           </div>
 
           {/* Links */}

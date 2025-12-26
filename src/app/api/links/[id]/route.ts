@@ -2,26 +2,34 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { cache, cacheKeys } from "@/lib/cache";
+import { logger } from "@/lib/logger";
 
 // Update a link
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  let linkId: string | undefined;
+  let userId: string | undefined;
+  
   try {
     const session = await getServerSession(authOptions);
     const { id } = await params;
+    linkId = id;
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: "לא מורשה" }, { status: 401 });
     }
 
+    userId = session.user.id;
+
     // Check if link belongs to user
     const existingLink = await prisma.link.findUnique({
-      where: { id },
+      where: { id: linkId },
     });
 
-    if (!existingLink || existingLink.userId !== session.user.id) {
+    if (!existingLink || existingLink.userId !== userId) {
       return NextResponse.json({ error: "הלינק לא נמצא" }, { status: 404 });
     }
 
@@ -46,7 +54,7 @@ export async function PATCH(
     };
 
     const link = await prisma.link.update({
-      where: { id },
+      where: { id: linkId },
       data: {
         ...(data.title !== undefined && { title: data.title }),
         ...(data.url !== undefined && { url: data.url }),
@@ -64,9 +72,17 @@ export async function PATCH(
       },
     });
 
+    // Invalidate cache
+    if (userId) {
+      cache.delete(cacheKeys.userLinks(userId));
+    }
+
     return NextResponse.json(link);
   } catch (error) {
-    console.error("Update link error:", error);
+    logger.error("Update link error", error instanceof Error ? error : new Error(String(error)), {
+      linkId: linkId,
+      userId: userId,
+    });
     return NextResponse.json({ error: "שגיאה בעדכון הלינק" }, { status: 500 });
   }
 }
@@ -76,30 +92,42 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  let linkId: string | undefined;
+  let userId: string | undefined;
+  
   try {
     const session = await getServerSession(authOptions);
     const { id } = await params;
+    linkId = id;
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: "לא מורשה" }, { status: 401 });
     }
 
+    userId = session.user.id;
+
     // Check if link belongs to user
     const existingLink = await prisma.link.findUnique({
-      where: { id },
+      where: { id: linkId },
     });
 
-    if (!existingLink || existingLink.userId !== session.user.id) {
+    if (!existingLink || existingLink.userId !== userId) {
       return NextResponse.json({ error: "הלינק לא נמצא" }, { status: 404 });
     }
 
     await prisma.link.delete({
-      where: { id },
+      where: { id: linkId },
     });
+
+    // Invalidate cache
+    cache.delete(cacheKeys.userLinks(userId));
 
     return NextResponse.json({ message: "הלינק נמחק" });
   } catch (error) {
-    console.error("Delete link error:", error);
+    logger.error("Delete link error", error instanceof Error ? error : new Error(String(error)), {
+      linkId: linkId,
+      userId: userId,
+    });
     return NextResponse.json({ error: "שגיאה במחיקת הלינק" }, { status: 500 });
   }
 }

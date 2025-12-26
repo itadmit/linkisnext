@@ -21,6 +21,24 @@
   --warning-text: #b45309; /* Amber 700 */
 }
 
+.dark {
+  --background: #18181b; /* Zinc 900 */
+  --foreground: #f4f4f5; /* Zinc 100 */
+  
+  --sidebar-bg: #27272a; /* Zinc 800 */
+  --sidebar-border: #3f3f46; /* Zinc 700 */
+  
+  --card-bg: #27272a; /* Zinc 800 */
+  --card-border: #3f3f46; /* Zinc 700 */
+  
+  --success-bg: #064e3b; /* Emerald 900 */
+  --success-text: #6ee7b7; /* Emerald 300 */
+  --error-bg: #7f1d1d; /* Red 900 */
+  --error-text: #fca5a5; /* Red 300 */
+  --warning-bg: #78350f; /* Amber 900 */
+  --warning-text: #fcd34d; /* Amber 300 */
+}
+
 body {
   font-family: var(--font-rubik), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   background-color: var(--background);
@@ -49,10 +67,23 @@ body {
   background: #a1a1aa;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #52525b;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+}
+
 /* Selection */
 ::selection {
   background: #e4e4e7; /* Subtle gray selection */
   color: #000000;
+}
+
+.dark ::selection {
+  background: #3f3f46;
+  color: #ffffff;
 }
 
 /* Utilities */

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { isValidEmail, isValidSlug, getReservedSlugs, validatePasswordStrength } from "@/lib/validators";
 import { checkRateLimit, getClientIdentifier } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
+import { sendEmail, emailTemplates } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   let email: string | undefined;
@@ -120,6 +121,19 @@ export async function POST(req: NextRequest) {
     });
 
     logger.info("User registered successfully", { userId: user.id, email: user.email });
+
+    // Send welcome email (async, don't wait for it)
+    const welcomeEmail = emailTemplates.welcome(user.name || user.slug, user.slug);
+    sendEmail({
+      to: user.email,
+      subject: welcomeEmail.subject,
+      html: welcomeEmail.html,
+      text: welcomeEmail.text,
+    }).catch((error) => {
+      logger.error("Failed to send welcome email", error instanceof Error ? error : new Error(String(error)), {
+        userId: user.id,
+      });
+    });
 
     return NextResponse.json({
       message: "המשתמש נוצר בהצלחה",

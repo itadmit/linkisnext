@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { sendEmail, emailTemplates } from "@/lib/email";
+import { logger } from "@/lib/logger";
+import { sendWebhook, WEBHOOK_EVENTS } from "@/lib/api/webhooks";
 
 // Get all leads for the current user
 export async function GET() {
@@ -95,54 +98,58 @@ export async function POST(req: NextRequest) {
     // Send email notification if enabled
     if (contactFormSettings?.data?.sendEmailNotification && contactFormSettings?.data?.notificationEmail) {
       try {
-        // In production, use a proper email service like SendGrid, Resend, etc.
-        // For now, we'll just log it
-        console.log("Email notification would be sent to:", contactFormSettings.data.notificationEmail);
-        console.log("Lead data:", formData);
-        
-        // TODO: Implement actual email sending
-        // await sendEmail({
-        //   to: contactFormSettings.data.notificationEmail,
-        //   subject: `ליד חדש מדף ${landingPage.name}`,
-        //   body: `קיבלת ליד חדש:\n\n${JSON.stringify(formData, null, 2)}`
-        // });
+        const emailTemplate = emailTemplates.newLead(formData, landingPage.name);
+        await sendEmail({
+          to: contactFormSettings.data.notificationEmail,
+          subject: emailTemplate.subject,
+          html: emailTemplate.html,
+          text: emailTemplate.text,
+        });
+        logger.info("Lead notification email sent", { 
+          landingPageId: landingPage.id,
+          leadId: lead.id,
+        });
       } catch (error) {
-        console.error("Failed to send email notification:", error);
+        logger.error("Failed to send email notification", error instanceof Error ? error : new Error(String(error)), {
+          landingPageId: landingPage.id,
+          leadId: lead.id,
+        });
       }
     }
 
-    // Send webhook if enabled
+    // Send webhook if enabled (using new webhook system)
     if (contactFormSettings?.data?.enableWebhook && contactFormSettings?.data?.webhookUrl) {
-      try {
-        const webhookResponse = await fetch(contactFormSettings.data.webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            event: "new_lead",
+      sendWebhook(
+        {
+          url: contactFormSettings.data.webhookUrl,
+          secret: contactFormSettings.data.webhookSecret,
+          events: [WEBHOOK_EVENTS.LEAD_CREATED],
+          enabled: true,
+        },
+        {
+          type: WEBHOOK_EVENTS.LEAD_CREATED,
+          payload: {
+            leadId: lead.id,
             landingPage: {
               id: landingPage.id,
               name: landingPage.name,
               slug: landingPage.slug,
             },
-            lead: {
-              id: lead.id,
-              formData: formData,
+            formData: formData,
+            metadata: {
               ipAddress,
               userAgent,
               referrer,
-              createdAt: lead.createdAt,
             },
-          }),
-        });
-
-        if (!webhookResponse.ok) {
-          console.error("Webhook failed:", webhookResponse.statusText);
+          },
+          timestamp: new Date().toISOString(),
         }
-      } catch (error) {
-        console.error("Failed to send webhook:", error);
-      }
+      ).catch((error) => {
+        logger.error("Webhook delivery failed", error instanceof Error ? error : new Error(String(error)), {
+          landingPageId: landingPage.id,
+          leadId: lead.id,
+        });
+      });
     }
 
     return NextResponse.json(lead);
